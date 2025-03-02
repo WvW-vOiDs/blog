@@ -6,21 +6,23 @@
 # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
 [highlight]
   ########## necessary configurations ##########
-  # https://github.com/Lruihao/FixIt/issues/43
+  # https://github.com/hugo-fixit/FixIt/issues/43
   codeFences = true
   lineNos = true
   lineNumbersInTable = true
   noClasses = false
   ########## necessary configurations ##########
   guessSyntax = true
-
 # Goldmark is from Hugo 0.60 the default library used for Markdown
+# https://gohugo.io/getting-started/configuration-markup/#goldmark
 [goldmark]
+  duplicateResourceFiles = false
   [goldmark.extensions]
     definitionList = true
     footnote = true
     linkify = true
-    strikethrough = true
+    linkifyProtocol = 'https'
+    strikethrough = false
     table = true
     taskList = true
     typographer = true
