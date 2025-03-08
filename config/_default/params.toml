@@ -48,7 +48,7 @@ disableThemeInject = false
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
   # e.g. "https://github.com/hugo-fixit/docs"
-  repo = "https://github.com/WvW-vOiDs/wvw-voids-blog"
+  repo = "https://github.com/WvW-vOiDs/blog"
   branch = "main"
   # the content directory path relative to the root of the repository
   dir = "content"
@@ -548,7 +548,7 @@ disableThemeInject = false
 # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
 [githubCorner]
   enable = true
-  permalink = "https://github.com/wvw-voids/wvw-voids-blog"
+  permalink = "https://github.com/wvw-voids/blog"
   title = "View source on GitHub"
   position = "right" # ["left", "right"]
 
