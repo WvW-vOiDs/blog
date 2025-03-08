@@ -1,9 +1,8 @@
 # -------------------------------------------------------------------------------------
-# Privacy Configuration
-# See: https://gohugo.io/about/hugo-and-gdpr/
+# Modules Configuration
+# See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
 # -------------------------------------------------------------------------------------
 
-[x]
-  enableDNT = true
-[youtube]
-  privacyEnhanced = true
+[hugoVersion]
+  extended = true
+  min = "0.141.0"

@@ -6,9 +6,9 @@
 # FixIt 0.2.15 | CHANGED FixIt theme version
 version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
 # site description
-description = "This is my new Hugo FixIt site"
+description = "VoidStalker's Blog"
 # site keywords
-keywords = ["Hugo", "FixIt"]
+keywords = ["Blog"]
 # site default theme ["light", "dark", "auto"]
 defaultTheme = "auto"
 # which hash function used for SRI, when empty, no SRI is used
@@ -23,7 +23,7 @@ enablePWA = false
 # FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
 externalIcon = false
 # FixIt 0.3.13 | NEW whether to capitalize titles
-capitalizeTitles = true
+capitalizeTitles = false
 # FixIt 0.3.0 | NEW whether to add site title to the title of every page
 # remember to set up your site title in `hugo.toml` (e.g. title = "title")
 withSiteTitle = true
@@ -40,15 +40,15 @@ disableThemeInject = false
 
 # Author Configuration
 [author]
-  name = "Lruihao"
-  email = "1024@lruihao.cn"
-  link = "https://github.com/Lruihao"
+  name = "WvW-vOiDs"
+  email = "voidsofficial@outlook.com"
+  link = "https://github.com/WvW-vOiDs"
   avatar = ""
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
   # e.g. "https://github.com/hugo-fixit/docs"
-  repo = ""
+  repo = "https://github.com/WvW-vOiDs/wvw-voids-blog"
   branch = "main"
   # the content directory path relative to the root of the repository
   dir = "content"
@@ -59,11 +59,11 @@ disableThemeInject = false
 # App icon config
 [app]
   # optional site title override for the app when added to an iOS home screen or Android launcher
-  title = "Hugo FixIt Blog"
+  title = "VoidStalker's Blog"
   # whether to omit favicon resource links
   noFavicon = false
   # modern SVG favicon to use in place of older style .png and .ico files
-  svgFavicon = ""
+  svgFavicon = "icons/favicon.svg"
   # Safari mask icon color
   iconColor = "#5bbad5"
   # Windows v8-10 tile color
@@ -106,7 +106,20 @@ disableThemeInject = false
     useExtendedSearch = false
     ignoreFieldNorm = false
 
-# Header config
+# FixIt 0.3.16 | NEW Custom Search Engine (CSE)
+[cse]
+  # Search Engine: ["google", "bing"]
+  engine = ""
+  # Search results page URL (layout: search)
+  resultsPage = "/search/"
+  # Google: https://programmablesearchengine.google.com/
+  # Google Custom Search Engine Context
+  [cse.google]
+    cx = ""
+  # Bing (Unsupported): https://www.customsearch.ai/
+  [cse.bing]
+
+# Headear config
 [header]
   # FixIt 0.2.13 | CHANGED desktop header mode ["sticky", "normal", "auto"]
   desktopMode = "sticky"
@@ -115,7 +128,7 @@ disableThemeInject = false
   # Header title config
   [header.title]
     # URL of the LOGO
-    logo = "/hugo-fixit-starter1/images/fixit.min.svg"
+    logo = ""
     # title name
     name = ""
     # you can add extra information before the name (HTML format is supported), such as icons
@@ -133,7 +146,7 @@ disableThemeInject = false
 
 # FixIt 0.2.18 | NEW Breadcrumb config
 [breadcrumb]
-  enable = false
+  enable = true
   sticky = false
   showHome = false
   # FixIt 0.3.13 | NEW
@@ -155,7 +168,7 @@ disableThemeInject = false
   # whether to show the author
   author = true
   # Site creation year
-  since = 2021
+  since = 2024
   # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
   gov = ""
   # ICP info only in China (HTML format is supported)
@@ -164,9 +177,9 @@ disableThemeInject = false
   license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
   # FixIt 0.3.0 | NEW whether to show Hugo and theme info
   [footer.powered]
-    enable = true
-    hugoLogo = true
-    themeLogo = true
+    enable = false
+    hugoLogo = false
+    themeLogo = false
   # FixIt 0.2.17 | CHANGED Site creation time
   [footer.siteTime]
     enable = false
@@ -185,14 +198,14 @@ disableThemeInject = false
 # FixIt 0.3.0 | NEW Archives page config (all pages of posts type)
 [archives]
   # special amount of posts in archives page
-  paginate = 20
+  pagination.pagerSize = 20
   # date format (month and day)
   dateFormat = "01-02"
 
 # Section page config (all pages in section)
 [section]
   # special amount of pages in each section page
-  paginate = 20
+  pagination.pagerSize = 20
   # date format (month and day)
   dateFormat = "01-02"
   # FixIt 0.3.10 | NEW Section feed config for RSS, Atom and JSON feed.
@@ -205,7 +218,7 @@ disableThemeInject = false
 # Term list (category or tag) page config
 [list]
   # special amount of posts in each list page
-  paginate = 20
+  pagination.pagerSize = 20
   # date format (month and day)
   dateFormat = "01-02"
   # FixIt 0.3.10 | NEW Term list feed config for RSS, Atom and JSON feed.
@@ -217,15 +230,15 @@ disableThemeInject = false
 
 # FixIt 0.3.13 | NEW recently updated pages config for archives, section and term list
 [recentlyUpdated]
-  archives = true
-  section = true
-  list = true
+  archives = false
+  section = false
+  list = false
   days = 30
   maxCount = 10
 
 # FixIt 0.2.17 | NEW TagCloud config for tags page
 [tagcloud]
-  enable = false
+  enable = true
   min = 14 # Minimum font size in px
   max = 32 # Maximum font size in px
   peakCount = 10 # Maximum count of posts per tag
@@ -237,30 +250,49 @@ disableThemeInject = false
   [home.profile]
     enable = true
     # Gravatar Email for preferred avatar in home page
-    gravatarEmail = "xx@xx.com"
+    gravatarEmail = "voidsofficial@outlook.com"
     # URL of avatar shown in home page
-    avatarURL = ""
+    avatarURL = "https://wvw-voids.github.io/"
     # FixIt 0.2.17 | NEW identifier of avatar menu link
     avatarMenu = ""
     # title shown in home page (HTML format is supported)
-    title = ""
+    title = "VoidStalker's Blog"
     # subtitle shown in home page (HTML format is supported)
-    subtitle = "This is my new Hugo FixIt site"
+    subtitle = ""
     # whether to use typeit animation for subtitle
-    typeit = true
+    typeit = false
     # whether to show social links
     social = true
     # disclaimer (HTML format is supported)
     disclaimer = ""
   # Home page posts
   [home.posts]
-    enable = true
+    enable = false
     # special amount of posts in each home posts page
-    paginate = 6
+    pagination.pagerSize = 6
 
 # FixIt 0.2.16 | CHANGED Social config about the author
 [social]
-  GitHub = ""
+  [social.GitHub]
+    # 排列图标时的权重（权重越大，图标的位置越靠后）
+    weight = 10
+    # 你的社交 ID
+    id = "WvW-vOiDs"
+    # 你的社交链接的前缀
+    prefix = "https://github.com/"
+    # 当鼠标停留在图标上时的提示内容
+    title = "Github"
+    [social.GitHub.icon]
+      class = "fa-brands fa-github fa-fw"
+
+  [social.bilibili]
+    weight = 20
+    id = "38675533"
+    prefix = "https://space.bilibili.com/"
+    title = "bilibili"
+    [social.bilibili.icon]
+      class = "fa-brands fa-bilibili"
+
   Linkedin = ""
   Twitter = ""
   Instagram = ""
@@ -321,7 +353,6 @@ disableThemeInject = false
   Gitea = ""
   XMPP = ""
   Matrix = ""
-  Bilibili = ""
   ORCID = ""
   Liberapay = ""
   Ko-Fi = ""
@@ -345,9 +376,10 @@ disableThemeInject = false
   Douyin = ""
   TikTok = ""
   Credly = ""
+  Bluesky = ""
   Phone = ""
   Email = ""
-  RSS = true
+  # RSS = false
   # custom social links like the following
   # [social.twitter]
   #   id = "lruihao"
@@ -464,10 +496,35 @@ disableThemeInject = false
     id = ""
     # server url for your tracker if you're self hosting
     server = ""
+   # FixIt 0.3.16 | NEW Baidu Analytics
+  [analytics.baidu]
+    id = ""
+  # FixIt 0.3.16 | NEW Umami Analytics
+  [analytics.umami]
+    data_website_id = ""
+    src = ""
+    data_host_url = ""
+    data_domains = ""
+  # FixIt 0.3.16 | NEW Plausible Analytics
+  [analytics.plausible]
+    data_domain = ""
+    src = ""
+  # FixIt 0.3.16 | NEW Cloudflare Analytics
+  [analytics.cloudflare]
+    token = ""
+  # FixIt 0.3.16 | NEW Splitbee Analytics
+  [analytics.splitbee]
+    enable = false
+    # no cookie mode
+    no_cookie = true
+    # respect the do not track setting of the browser
+    do_not_track = true
+    # token(optional), more info on https://splitbee.io/docs/embed-the-script
+    data_token = ""
 
 # Cookie consent config
 [cookieconsent]
-  enable = true
+  enable = false
   # text strings used for Cookie consent banner
   [cookieconsent.content]
     message = ""
@@ -490,8 +547,8 @@ disableThemeInject = false
 
 # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
 [githubCorner]
-  enable = false
-  permalink = "https://github.com/hugo-fixit/FixIt"
+  enable = true
+  permalink = "https://github.com/wvw-voids/wvw-voids-blog"
   title = "View source on GitHub"
   position = "right" # ["left", "right"]
 
@@ -507,19 +564,19 @@ disableThemeInject = false
 [backToTop]
   enable = true
   # Scroll percent label in b2t button
-  scrollpercent = false
+  scrollpercent = true
 
 # FixIt 0.2.16 | NEW Reading progress bar
 [readingProgress]
-  enable = false
+  enable = true
   # Available values: ["left", "right"]
   start = "left"
   # Available values: ["top", "bottom"]
   position = "top"
   reversed = false
-  light = ""
-  dark = ""
-  height = "2px"
+  light = "#00BCD4"
+  dark = "#0097A7"
+  height = "2.5px"
 
 # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
 # For more information: https://github.com/CodeByZach/pace
@@ -527,11 +584,58 @@ disableThemeInject = false
   enable = false
   # All available colors:
   # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
-  color = "blue"
+  color = "orange"
   # All available themes:
   # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
   # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
   theme = "minimal"
+
+# FixIt 0.3.17 | NEW PostChat AI config
+  # Based on your posts to build a knowledge base, support AI summary, AI search, and AI Chatbot.
+  # Get PostChat Key from my invitation link, thanks for your support!
+  # https://ai.tianli0.top/?InviteID=IRE1S88Z
+  [postChat]
+    enable = false
+    key = ""
+    # How users initiate chats: ["iframe", "magic"]
+    userMode = "iframe"
+    addButton = true
+    defaultInput = false
+    left = ""
+    bottom = ""
+    width = ""
+    height = ""
+    fill = ""
+    backgroundColor = ""
+    upLoadWeb = true
+    showInviteLink = true
+    userTitle = ""
+    userDesc = ""
+    # dom container to be blacked out, e.g. [".aplayer"]
+    blackDom = []
+    # Only for iframe mode
+    frameWidth = ""     # e.g. "375px"
+    frameHeight = ""    # e.g. "600px"
+    # only for magic mode
+    userIcon = ""
+    defaultChatQuestions = []
+    defaultSearchQuestions = []
+
+  # FixIt 0.3.17 | NEW Summary AI config
+  # See https://postchat.zhheo.com/summary.html
+  [postSummary]
+    enable = false
+    # If you set `params.postChat.key`, you don't need to set `params.postSummary.key`
+    key = ""
+    title = ""
+    # themes options: ["", "simple", "yanzhi"]
+    theme = ""
+    postURL = ""
+    blacklist = ""
+    wordLimit = 1000
+    typingAnimate = true
+    beginningText = ""
+    loadingText = true
 
 # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
 [feed]
@@ -548,15 +652,19 @@ disableThemeInject = false
 # Custom partials must be stored in the /layouts/partials/ directory.
 # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
 [customPartials]
-  head = [
-    "inject/fixit-docs-bookmark.html",
-  ]
+  head = []
+  menuDesktop = []
+  menuMobile = []
   profile = []
   aside = []
   comment = []
   footer = []
   widgets = []
   assets = []
+  postTocBefore = []
+  postTocAfter = []
+  postContentBefore = []
+  postContentAfter = []
   postFooterBefore = []
   postFooterAfter = []
 
@@ -571,7 +679,7 @@ disableThemeInject = false
 # Page config
 [page]
   # FixIt 0.2.18 | NEW whether to enable the author's avatar of the post
-  authorAvatar = true
+  authorAvatar = false
   # whether to hide a page from home page
   hiddenFromHomePage = false
   # whether to hide a page from search results
@@ -585,7 +693,7 @@ disableThemeInject = false
   # FixIt 0.2.18 | CHANGED whether to enable lightgallery
   # set to true, images in the content will be shown as the gallery if the image has a title, e.g. ![alt](src "title")
   # set to "force", images in the content will be forced to shown as the gallery regardless of the image has a title or not, e.g. ![alt](src)
-  lightgallery = false
+  lightgallery = true
   # whether to enable the ruby extended syntax
   ruby = true
   # whether to enable the fraction extended syntax
@@ -595,7 +703,7 @@ disableThemeInject = false
   # license info (HTML format is supported)
   license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
   # whether to show link to Raw Markdown content of the post
-  linkToMarkdown = true
+  linkToMarkdown = false
   # FixIt 0.3.0 | NEW whether to show link to view source code of the post
   linkToSource = true
   # FixIt 0.3.0 | NEW whether to show link to edit the post
@@ -608,15 +716,15 @@ disableThemeInject = false
   # If true, save the reading progress when closing the page.
   autoBookmark = false
   # FixIt 0.2.17 | NEW whether to enable wordCount
-  wordCount = true
+  wordCount = false
   # FixIt 0.2.17 | NEW whether to enable readingTime
-  readingTime = true
+  readingTime = false
   # FixIt 0.2.17 | NEW end of post flag
-  endFlag = ""
+  endFlag = "End."
   # FixIt 0.2.18 | NEW whether to enable instant.page
-  instantPage = false
+  instantPage = true
   # FixIt 0.3.0 | NEW whether to enable collection list at the sidebar
-  collectionList = false
+  collectionList = true
   # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
   collectionNavigation = false
 
@@ -728,7 +836,7 @@ disableThemeInject = false
       # bitcoin = "/images/bitcoin.png"
   # social share links in post page
   [page.share]
-    enable = true
+    enable = false
     Twitter = true
     Facebook = true
     Linkedin = false

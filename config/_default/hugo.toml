@@ -3,20 +3,94 @@
 # See: https://gohugo.io/getting-started/configuration/
 # -------------------------------------------------------------------------------------
 
-title = "Hugo FixIt Blog"
-baseURL = "https://hugo-fixit.github.io/hugo-fixit-starter1/"
-theme = [
-  "FixIt",
-  "shortcode-docs-bookmark"
-]
-defaultContentLanguage = "en"
-languageCode = "en"
+# website title
+title = "VoidStalker's Blog"
+# Hostname (and path) to the root
+baseURL = "http://wvw-voids.github.io/blog/"
+# theme list
+theme = ["FixIt"] # enable in your site config file
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
+defaultContentLanguage = "zh-cn"
+# language code ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "zh-CN"
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "简体中文"
+# whether to include Chinese/Japanese/Korean
 hasCJKLanguage = true
+# default amount of posts in each pages
+pagination.pagerSize = 8
+# copyright description used only for seo schema
+copyright = "CC BY-NC-SA 4.0"
+# whether to use robots.txt
 enableRobotsTXT = true
-enableEmoji = true
+# whether to use git commit log
 enableGitInfo = true
-relativeURLs = false
+# whether to use emoji code
+enableEmoji = false
+relativeURLs = false # Do not enable this option unless you are creating a serverless site, navigable via the file system.
+
 buildDrafts = false
-summaryLength = 150
+hideSummary = true # WvW-vOiDs: 默认不显示 Summary 除非在导言区写了并设置为 false
+summaryLength = 150 # https://gohugo.io/content-management/summaries/#automatic-summary
 # ignore some build errors
-ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+# ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
+
+
+
+# -------------------------------------------------------------------------------------
+# Media Types
+# See: https://gohugo.io/configuration/media-types/
+# -------------------------------------------------------------------------------------
+
+[mediaTypes]
+  [mediaTypes."application/feed+json"]
+    suffixes = ["json"]
+
+# -------------------------------------------------------------------------------------
+# Output Format Definitions
+# See: https://gohugo.io/templates/output-formats/#output-format-definitions
+# -------------------------------------------------------------------------------------
+
+[outputFormats]
+  # FixIt 0.3.0 | NEW Options to make output /archives/index.html file
+  [outputFormats.archives]
+    path = "archives"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
+    notAlternative = true
+  # FixIt 0.3.0 | NEW Options to make output /offline/index.html file
+  [outputFormats.offline]
+    path = "offline"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
+    notAlternative = true
+  # FixIt 0.3.0 | NEW Options to make output readme.md file
+  [outputFormats.readme]
+    baseName = "readme"
+    mediaType = "text/markdown"
+    isPlainText = true
+    isHTML = false
+    notAlternative = true
+  # FixIt 0.3.0 | CHANGED Options to make output baidu_urls.txt file
+  [outputFormats.baidu_urls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
+    notAlternative = true
+  # FixIt 0.3.10 | NEW Options to make output search.json file
+  [outputFormats.search]
+    baseName = "search"
+    mediaType = "application/json"
+    rel = "search"
+    isPlainText = true
+    isHTML = false
+    permalinkable = true
+
