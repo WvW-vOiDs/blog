@@ -135,10 +135,10 @@ html 插入图片:
 
 - [slidev](https://sli.dev)
 
-<!-- <iframe
+<iframe
     src="https://sli.dev/demo/starter"
     style="width: 100%; aspect-ratio: 16/9; border: none;"
-></iframe> -->
+></iframe>
 
 参考了 [Thomas Boerger](https://github.com/tboerger/talks), [Anthony Fu](https://github.com/antfu/talks), [Haili Zhang](https://github.com/webup/openfunction-talks) 等人的项目.
 
