@@ -50,59 +50,317 @@ cover:
 # mathjax: false # 禁止 mathjax 渲染 latex 公式
 ---
 
-# h1
-## h2
-### h3
-#### h4
-##### h5
-###### h6
+## Markdown 基本语法
 
-# Markdown 语法测试
+FixIt 主题作者已经提供了一个很好的 [markdown 基本语法介绍](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/), 这里仅对个人不太熟悉和常用的进行记录. 本节内容大量来自于主题作者提供的 [文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/).
 
-## 基本 markdown 语法
+### 锚点
 
-1. 有序列表
-    1. 有序列表
-        1. 有序列表
-            1. 有序列表
-2. 有序列表
-3. 有序列表
+#### 标题锚点 <a id="custom-id"></a>
 
+标题自带锚点, 即标题的内容(空格用 `-` 替代, 大写用小写替代). 如 [点击这里](#锚点) 可以链接到本节标题. 如果有同名标题, 则按顺序在后面添加 `-1`, `-2`等后缀, 如: `#锚点`, `#锚点-1`, `#锚点-2`.
 
----
+> [!Note]
+> 要想自定义标题锚点名称, 请在与标题相同的行中将自定义 ID 放在花括号中, 或者用[正文锚点](#正文锚点):
+> ```md
+> ## markdown 基本语法 {#custom-id}
+> ## markdown 基本语法 <a id="custom-id"></a>
+> ```
+> 前者会导致默认生成的锚点 (上例中即为 `#markdown-基本语法`) 无法使用, 取而代之为自定义的锚点名称 (上例中即为 `#custon-id`). 后者则是两个锚点名均可使用并且定位到相同位置.
 
-- 无序列表
-    - 无序列表
-        - 无序列表
-            - 无序列表
-- 无序列表
-- 无序列表
+#### 正文锚点
 
----
+可以在正文中任意位置处添加锚点:
+```md
+我想在这句话处添加一个锚点.<a id="a-means-anchor"></a>
 
-正常|**加粗**|_斜体_|***粗斜体***|_斜体**包含粗体**斜体_|__粗体*包含斜体*粗体__.[^粗斜体]
+这样我就可以[跳转](#a-means-anchor)到相应的地方.
+```
+> [!Example]-
+> 我想在这句话处添加一个锚点.<a id="a-means-anchor"></a>
+>
+> 这样我就可以[跳转](#a-means-anchor)到相应的地方.
 
+### 粗体和斜体
+
+按照个人习惯规定, 粗体使用 `**` 包裹, 斜体使用 `_` 包裹. 但是 粗体中有斜体 除外, 使用 `__粗体*粗斜体*粗体__` 形式.[^粗斜体]
 [^粗斜体]: 粗中有斜和斜中有粗只能外面`_`, 里面`*`.
 
-~~删除线~~
+```md
+__粗体*粗斜体*粗体__ <!-- 正确渲染 -->
+**粗体_粗斜体_粗体** <!-- 错误渲染 -->
+_斜体**粗斜体**斜体_ <!-- 正确渲染 -->
+*斜体__粗斜体__斜体* <!-- 错误渲染 -->
+```
 
-<u>下划线</u> (html `<u>` 实现)
+> [!Example]-
+> __粗体*粗斜体*粗体__<br>
+> **粗体_粗斜体_粗体**<br>
+> _斜体**粗斜体**斜体_<br>
+> *斜体__粗斜体__斜体*<br><br>
+> 全体对比: 正常|**加粗**|_斜体_|***粗斜体***|_斜体**包含粗体**斜体_|__粗体*包含斜体*粗体__.
 
----
+### 预格式化文本
 
-> 引用
->> 引用一级缩进
->>> 引用二级缩进
->>
->>>引用二级缩进
+如果想要保留原格式输出一些文本, 可以使用[预格式化文本]^(preformatted text).
+
+```md
+<pre>
+这是一些
+    预格式化的文本.
+   文本中的空格 和 换行符
+        都会被保留.
+</pre>
+```
+
+> [!Example]-
+> <pre>
+> 这是一些
+>     预格式化的文本.
+>    文本中的空格 和 换行符
+>         都会被保留.
+> </pre>
+
+### 超链接
+
+基本格式:
+```md
+https://WvW-vOiDs.github.io
+<https://WvW-vOiDs.github.io> <!-- 直接写链接时推荐 -->
+<voidsofficial@outlook.com>
+[我的主页](https://WvW-vOiDs.github.io)
+[我的主页](https://WvW-vOiDs.github.io "跳转到 Github")
+[我的主页][MyHomePage]
+[MyHomePage]: https://WvW-vOiDs.github.io "跳转到 Github" <!-- 这个可以放在文章的任何地方 -->
+```
+
+> [!Example]-
+> https://WvW-vOiDs.github.io <br>
+> <https://WvW-vOiDs.github.io> <br>
+> <voidsofficial@outlook.com> <br>
+> [我的主页](https://WvW-vOiDs.github.io) <br>
+> [我的主页](https://WvW-vOiDs.github.io "跳转到 Github")<br>
+> [我的主页][MyHomePage]
+
+[MyHomePage]: https://WvW-vOiDs.github.io "跳转到 Github"
+
+
+## Markdown 扩展语法
+
+本节内容为 FixIt 主题定制版语法. 与上节相同, 本节内容全部来自于 [FixIt 官方介绍文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/extended/).
+
+### Callout
+
+Callout 是特殊的 用于强调关键信息的 引用块. FixIt 中基本兼容 [obsidian 中的 callouts 用法](https://help.obsidian.md/callouts).
+
+FixIt 有两种类型的 Callouts:
+
+#### 基本 Callout
+
+如果给这些基本 Callout 加 title, 或者选择是否折叠, 则会变成[扩展版](#扩展-callout).
+
+```md
+> [!note]
+
+> [!tip]
+
+> [!important]
+
+> [!warning]
+
+> [!caution]
+```
+> [!Example]-
+> > [!note]
+> > Lorem ipsum dolor sit amet<br>
+> > WvW-Note: 这是排版中常用的无意义拉丁文
 >
->> 引用一级缩进
+> > [!tip]
+> > Lorem ipsum dolor sit amet
+>
+> > [!important]
+> > Lorem ipsum dolor sit amet
+>
+> > [!warning]
+> > Lorem ipsum dolor sit amet
+>
+> > [!caution]
+> > Lorem ipsum dolor sit amet
 
----
+#### 扩展 Callout
 
-网页链接测试: [哔哩哔哩](https://www.bilibili.com/ "哔哩哔哩 干杯!").
+扩展 Callouts [**可以**]^(optional) 在类型后面加 `+` 和 `-` 来表示其默认状态.
 
----
+> [!note]
+> Obsidian 自定义 callout 标题的方法和 FixIt 不太一样:
+> ```md
+> <!-- Obsidian 允许用以下方式自定义 callout 标题: -->
+> > [!Everything is ok.]
+> <!-- 这等价于: -->
+> > [!note] Everything is ok.
+>
+> <!-- FixIt 只能用以下方式自定义 callout 标题: -->
+> > [!note] Everything is ok.
+> > [!warning] Everything is not ok.
+> ...
+> ```
+
+FixIt 支持在配置文件中[自定义 callout](https://fixit.lruihao.cn/zh-cn/documentation/advanced/#custom-admonitions). FixIt 主题原生支持以下类型扩展版 callouts.
+
+```md
+> [!note] This is Title.
+
+> [!tip]
+> alias: important, hint
+
+> [!warning]
+> aliases: caution, attention
+
+> [!abstract]
+> aliases: summary, tldr.
+
+> [!info]
+
+> [!todo]
+
+> [!success]
+> aliases: check, done
+
+> [!question]
+> aliases: help, faq
+
+> [!failure]
+> aliases: fail, missing
+
+> [!danger]
+> alias: error
+
+> [!bug]
+
+> [!example]
+
+> [!quote]
+> alias: cite
+```
+
+> [!Example]-
+> > [!note] This is Title.
+> > type: note
+>
+> > [!tip]+
+> > type: tip<br>
+> > aliases: important, hint
+>
+> > [!warning]+
+> > type: warning<br>
+> > aliases: caution, attention
+>
+> > [!abstract]+
+> > type: abstract<br>
+> > aliases: summary, tldr<br>
+> > WvW-Note: TL;DR means: too long; didn't read.
+>
+> > [!info]-
+> > type: info<br>
+> > 一些不太重要的信息.
+>
+> > [!todo]
+> > type: todo
+>
+> > [!success]
+> > type: success<br>
+> > aliases: check, done
+>
+> > [!question]
+> > type: question<br>
+> > aliases: help, faq<br>
+> > WvW-Note: faq means: frequently asked questions.
+>
+> > [!failure]
+> > type: failure<br>
+> > aliases: fail, missing
+>
+> > [!danger]
+> > type: danger<br>
+> > alias: error
+>
+> > [!bug]
+> > type: bug
+>
+> > [!example]
+> > type: example
+>
+> > [!quote]
+> > type: quote<br>
+> > alias: cite
+
+### 任务列表
+
+FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状态, 所有支持的状态如下:
+```md
+- [ ] 未完成
+- [x] 已完成
+- [/] 进行中
+- [-] 已取消
+- [<] 已计划
+- [>] 已重新计划
+- [!] 重要
+- [?] 问题
+```
+
+> [!Example]-
+> - [ ] 未完成
+> - [x] 已完成
+> - [/] 进行中
+> - [-] 已取消
+> - [<] 已计划
+> - [>] 已重新计划
+> - [!] 重要
+> - [?] 问题
+
+同 callout, FixIt 支持[自定义待办事项](https://fixit.lruihao.cn/zh-cn/documentation/advanced/#custom-task-lists).
+
+### 下划线, 高亮 和 上下标
+
+在 加粗, 斜体, 删除线 的基础 markdown 语法上, FixIt 定义了类似的扩展语法:
+```md {data-open=true}
+这是++下划线++.
+这是==高亮==.
+这是^上标^.
+这是~下标~.
+
+其他高亮颜色:
+==Primary==[primary]
+==Secondary==[secondary]
+==Success==[success]
+==Info==[info]
+==Warning==[warning]
+==Danger==[danger]
+```
+> [!Example]-
+> 这是++下划线++.<br>
+> 这是==高亮==.<br>
+> 这是^上标^.<br>
+> 这是~下标~.<br>
+> <br>
+> 其他高亮颜色:<br>
+> ==Primary==[primary]
+> ==Secondary==[secondary]
+> ==Success==[success]
+> ==Info==[info]
+> ==Warning==[warning]
+> ==Danger==[danger]
+
+其中, 上标已禁用, 因为有时会和[文字上方标记](#字符注音或者注释)冲突.
+
+### 数学公式
+
+FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但由于个人对宏包有较多需求, 故暂时使用了一个 **破坏性的** 方法强制使用 [MathJax](https://www.mathjax.org/). 具体情况见:
+{{< link href="https://github.com/hugo-fixit/FixIt/issues/574" content="[FEATURE] Add MathJax Support as an Alternative Renderer" title="[FEATURE] Add MathJax Support as an Alternative Renderer" card=true card-icon="fa-brands fa-github fa-fw" >}}
+
+TO BE CONTINUED...
+
+
 
 markdown 插入图片:
 
@@ -236,8 +494,6 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 
 ---
 
-上标^测试^ vs. 下标~测试~
-
 中文“引号” vs. 英文"引号"
 
 ---
@@ -290,7 +546,7 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 
 ---
 
-[extras:](https://gohugo.io/getting-started/configuration-markup/#extras):
+[extras](https://gohugo.io/getting-started/configuration-markup/#extras):
 
 ~~foo~~
 
@@ -504,25 +760,6 @@ Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
 `This is Inline Code.`
 
 
-### 预格式化文本 (preformatted text)
-
-*code*:
-```html
-<pre>
-这是一些
-    预格式化的文本.
-    空格 和 换行符
-        都会被保留.111
-</pre>
-```
-
-*output*:
-<pre>
-这是一些
-    预格式化的文本.
-    空格 和 换行符
-        都会被保留.111
-</pre>
 
 
 ### 行间代码
@@ -633,7 +870,8 @@ Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
 # References
 
 - [hugo.](https://github.com/gohugoio/hugo)
-- [hugo-PaperMod.](https://github.com/adityatelange/hugo-PaperMod)
+- [hugo-PaperMod theme.](https://adityatelange.github.io/hugo-PaperMod/)
+- [hugo-FixIt theme.](https://fixit.lruihao.cn/)
 - [随机图床.](https://t.alcy.cc/ycy)
 - [MarkDown语法 超详细教程.](https://forum-zh.obsidian.md/t/topic/435)
 - [The configuration block.](https://docs.mathjax.org/en/latest/options/input/tex.html#the-configuration-block)
