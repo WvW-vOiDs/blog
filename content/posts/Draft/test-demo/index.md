@@ -4,7 +4,14 @@
 # **************************************************************************** #
 date: "2024-12-30T12:03:13+08:00"
 title: "Test Demo"
+# subtitle: "Subtitle"
 slug: "test-demo"
+# author:
+#     name: "Me" # 文章作者
+#     link: "https://example.com" # 文章作者的链接
+#     email: "me@me.com" # 文章作者的邮箱，用于设置 Gravatar 头像，优先于 `author.avatar`
+#     avatar: "" # 文章作者的头像
+
 
 
 description: "Description 将会在 single page 展示. 本文用于测试网站功能."
@@ -147,7 +154,7 @@ https://WvW-vOiDs.github.io
 
 ## Markdown 扩展语法
 
-本节内容为 FixIt 主题定制版语法. 与上节相同, 本节内容全部来自于 [FixIt 官方介绍文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/extended/).
+本节内容为 FixIt 主题定制版语法. 与上节相同, 本节内容基本全部来自于 [FixIt 官方介绍文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/extended/).
 
 ### Callout
 
@@ -340,7 +347,7 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 > [!Example]-
 > 这是++下划线++.<br>
 > 这是==高亮==.<br>
-> 这是^上标^.<br>
+> 这是^上标^.[^禁用上标]<br>
 > 这是~下标~.<br>
 > <br>
 > 其他高亮颜色:<br>
@@ -351,15 +358,960 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 > ==Warning==[warning]
 > ==Danger==[danger]
 
-其中, 上标已禁用, 因为有时会和[文字上方标记](#字符注音或者注释)冲突.
+[^禁用上标]: 上标已禁用, 因为有时会和[文字上方标记](#字符注音-或-注释)冲突.
 
 ### 数学公式
 
 FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但由于个人对宏包有较多需求, 故暂时使用了一个 **破坏性的** 方法强制使用 [MathJax](https://www.mathjax.org/). 具体情况见:
 {{< link href="https://github.com/hugo-fixit/FixIt/issues/574" content="[FEATURE] Add MathJax Support as an Alternative Renderer" title="[FEATURE] Add MathJax Support as an Alternative Renderer" card=true card-icon="fa-brands fa-github fa-fw" >}}
 
+### 字符注音 或 注释
+
+> FixIt 主题支持一种 字符注音或者注释 Markdown 扩展语法:
+```md
+[MMA]{?^}(Mathematica) 是一个很好用的计算软件.
+```
+> [!Example]-
+> [MMA]^(Mathematica) 是一个很好用的计算软件.
+
+### 分数
+
+> FixIt 主题支持一种 分数 Markdown 扩展语法:
+```md
+[浅色]{?/}[深色]
+[99]{?/}[100]
+```
+> [!Example]-
+> [浅色]/[深色]<br>
+> [99]/[100]
+
+
+### Font Awesome
+
+> FixIt 主题使用 [Font Awesome V6](https://fontawesome.com/) 作为图标库, 可以轻松使用其中的图标:
+```md
+:(fa-sharp fa-solid fa-circle-user{?)}:
+:(fa-regular fa-circle-user{?)}:
+```
+> [!Example]-
+> :(fa-sharp fa-solid fa-circle-user):<br>
+> :(fa-regular fa-circle-user):
+
+### 转义字符
+
+> 在某些特殊情况下 (编写这个主题文档时 :(fa-regular fa-grin-squint-tears):), 你的文章内容会与 Markdown 的基本或者扩展语法冲突, 并且无法避免. 转义字符语法可以帮助你渲染出想要的内容:
+> ```md
+> {?{}?X}->X
+> ```
+
+```md
+[link{?]}(#escape-character)
+```
+> [!Example]-
+> [link{?]}(#escape-character)
+
+### Markdown 属性
+
+Hugo 支持图像和块元素上的 [Markdown 属性](https://gohugo.io/content-management/markdown-attributes/), 包括块引用、围栏代码块、标题、水平线、列表、段落和表格.
+
+在大多数情况下, 将属性列表放置在标记元素下方. 对于标题和围栏代码块, 将属性列表放在右侧.
+```md
+some Markdown content
+{#id .class1 .class2 key1="value1" key2="value2"}
+```
+
+#### 分割线
+
+```md
+<!-- 带有 CSS 类的分割线 -->
+---
+{.awesome-hr}
+```
+呈现的输出如下所示:
+
+---
+{.awesome-hr}
+
+#### 引用
+
+```md
+<!-- 带有 CSS 类的分割线 -->
+> The quick brown fox jumps over the lazy dog.
+{.blockquote-center}
+```
+呈现的输出如下所示:
+
+> The quick brown fox jumps over the lazy dog.
+{.blockquote-center}
+
+#### 表格 和 列表
+
+目前有一些限制: 对于表格, 你目前只能将其应用于完整表格; 而对于列表, 仅适用于 `<ul>`/`<ol>` 节点, 例如:
+
+```md
+- 水果
+  - 苹果
+  - 橙子
+  - 香蕉
+  {.text-success}
+- 乳制品
+  - 牛奶
+  - 奶酪
+  {.text-warning}
+{.text-primary}
+```
+呈现的输出如下所示:
+- 水果
+  - 苹果
+  - 橙子
+  - 香蕉
+  {.text-success}
+- 乳制品
+  - 牛奶
+  - 奶酪
+  {.text-warning}
+{.text-primary}
+
+#### 代码块
+
+请注意, [code fences](https://gohugo.io/content-management/syntax-highlighting/#highlighting-in-code-fences) 中的属性和其他高亮处理指令必须位于开始标记之后, 例如:
+````md {data-open=true}
+<!-- title -->
+```js {title="test.js"}
+console.log('hello FixIt!');
+```
+
+<!-- highlight -->
+```go {hl_lines=[3,"6-8"] style=emacs}
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 3; i++ {
+        fmt.Println("Value of i:", i)
+    }
+}
+```
+
+<!-- no-header -->
+```js {.no-header}
+function forEach(elements, handler) {
+  elements = elements || [];
+  for (let i = 0; i < elements.length; i++) {
+    handler(elements[i]);
+  }
+}
+```
+
+<!-- data-open -->
+```js {data-open=false}
+console.log('hello FixIt!');
+```
+````
+
+> [!Example]-
+> title
+> ```js {title="test.js"}
+> console.log('hello FixIt!');
+> ```
+>
+> highlight
+> ```go {hl_lines=[3,"6-8"]}
+> package main
+>
+> import "fmt"
+>
+> func main() {
+>     for i := 0; i < 3; i++ {
+>         fmt.Println("Value of i:", i)
+>     }
+> }
+> ```
+>
+> no-header
+> ```js {.no-header}
+> function forEach(elements, handler) {
+>   elements = elements || [];
+>   for (let i = 0; i < elements.length; i++) {
+>     handler(elements[i]);
+>   }
+> }
+> ```
+>
+> data-open
+> ```js {data-open=false}
+> console.log('hello FixIt!');
+> ```
+
+### 代码块拓展语法
+
+#### GoAT
+
+[[GoAT]^(Go ASCII Tool)](https://github.com/bep/goat) 是 [markdeep.mini.js](https://casual-effects.com/markdeep/) 图像生成器的 Go 语言实现.
+
+要使用 GoAT, 只需将 ASCII 输入放在代码块中, 并将语言设置为 goat.
+
+> [!Example]-
+> Trees:
+> ````md {data-open=false}
+> ```goat
+>       .               .                .               .--- 1          .-- 1     / 1
+>      / \              |                |           .---+            .-+         +
+>     /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+>    +     +        |       |        |       |    ---+            ---+          +
+>   / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+>  /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+>  1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+> ```
+> ````
+> ```goat
+>       .               .                .               .--- 1          .-- 1     / 1
+>      / \              |                |           .---+            .-+         +
+>     /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+>    +     +        |       |        |       |    ---+            ---+          +
+>   / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+>  /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+>  1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+> ```
+>
+> Overlaps:
+> ````md {data-open=false}
+> ```goat
+>        .-.           .-.           .-.           .-.           .-.           .-.
+>       |   |         |   |         |   |         |   |         |   |         |   |
+>    .---------.   .--+---+--.   .--+---+--.   .--|   |--.   .--+   +--.   .------|--.
+>   |           | |           | |   |   |   | |   |   |   | |           | |   |   |   |
+>    '---------'   '--+---+--'   '--+---+--'   '--|   |--'   '--+   +--'   '--|------'
+>       |   |         |   |         |   |         |   |         |   |         |   |
+>        '-'           '-'           '-'           '-'           '-'           '-'
+> ```
+> ````
+> ```goat
+>        .-.           .-.           .-.           .-.           .-.           .-.
+>       |   |         |   |         |   |         |   |         |   |         |   |
+>    .---------.   .--+---+--.   .--+---+--.   .--|   |--.   .--+   +--.   .------|--.
+>   |           | |           | |   |   |   | |   |   |   | |           | |   |   |   |
+>    '---------'   '--+---+--'   '--+---+--'   '--|   |--'   '--+   +--'   '--|------'
+>       |   |         |   |         |   |         |   |         |   |         |   |
+>        '-'           '-'           '-'           '-'           '-'           '-'
+> ```
+>
+> Line Decorations:
+> ````md {data-open=false}
+> ```goat
+>               ________                            o        *          *   .--------------.
+>  *---+--.    |        |     o   o      |         ^          \        /   |  .----------.  |
+>      |   |    '--*   -+-    |   |      v        /            \      /    | |  <------.  | |
+>      |    '----->       .---(---'  --->*<---   /      .+->*<--o----'     | |          | | |
+>  <--'  ^  ^             |   |                 |      | |  ^    \         |  '--------'  | |
+>         \/        *-----'   o     |<----->|   '-----'  |__|     v         '------------'  |
+>         /\                                                               *---------------'
+> ```
+> ````
+> ```goat
+>               ________                            o        *          *   .--------------.
+>  *---+--.    |        |     o   o      |         ^          \        /   |  .----------.  |
+>      |   |    '--*   -+-    |   |      v        /            \      /    | |  <------.  | |
+>      |    '----->       .---(---'  --->*<---   /      .+->*<--o----'     | |          | | |
+>  <--'  ^  ^             |   |                 |      | |  ^    \         |  '--------'  | |
+>         \/        *-----'   o     |<----->|   '-----'  |__|     v         '------------'  |
+>         /\                                                               *---------------'
+> ```
+>
+> Line Ends:
+> ````md {data-open=false}
+> ```goat
+>  o--o    *--o     /  /   *  o  o o o o   * * * *   o o o o   * * * *      o o o o   * * * *
+>  o--*    *--*    v  v   ^  ^   | | | |   | | | |    \ \ \ \   \ \ \ \    / / / /   / / / /
+>  o-->    *-->   *  o   /  /    o * v '   o * v '     o * v \   o * v \  o * v /   o * v /
+>  o---    *---
+>                                ^ ^ ^ ^   . . . .   ^ ^ ^ ^   \ \ \ \      ^ ^ ^ ^   / / / /
+>  |  |   *  o  \  \   *  o      | | | |   | | | |    \ \ \ \   \ \ \ \    / / / /   / / / /
+>  v  v   ^  ^   v  v   ^  ^     o * v '   o * v '     o * v \   o * v \  o * v /   o * v /
+>  *  o   |  |    *  o   \  \
+>
+>  <--o   <--*   <-->   <---      ---o   ---*   --->   ----      *<--   o<--   -->o   -->*
+> ```
+> ````
+> ```goat
+>  o--o    *--o     /  /   *  o  o o o o   * * * *   o o o o   * * * *      o o o o   * * * *
+>  o--*    *--*    v  v   ^  ^   | | | |   | | | |    \ \ \ \   \ \ \ \    / / / /   / / / /
+>  o-->    *-->   *  o   /  /    o * v '   o * v '     o * v \   o * v \  o * v /   o * v /
+>  o---    *---
+>                                ^ ^ ^ ^   . . . .   ^ ^ ^ ^   \ \ \ \      ^ ^ ^ ^   / / / /
+>  |  |   *  o  \  \   *  o      | | | |   | | | |    \ \ \ \   \ \ \ \    / / / /   / / / /
+>  v  v   ^  ^   v  v   ^  ^     o * v '   o * v '     o * v \   o * v \  o * v /   o * v /
+>  *  o   |  |    *  o   \  \
+>
+>  <--o   <--*   <-->   <---      ---o   ---*   --->   ----      *<--   o<--   -->o   -->*
+> ```
+>
+> Dot Grids:
+> ````md {data-open=false}
+> ```goat
+>  o o o o o  * * * * *  * * o o *    o o o      * * *      o o o     · * · · ·     · · ·
+>  o o o o o  * * * * *  o o o o *   o o o o    * * * *    * o * *    · * * · ·    · · · ·
+>  o o o o o  * * * * *  o * o o o  o o o o o  * * * * *  o o o o o   · o · · o   · · * * ·
+>  o o o o o  * * * * *  o * o o o   o o o o    * * * *    o * o o    · · · · o    · · * ·
+>  o o o o o  * * * * *  * * * * o    o o o      * * *      o * o     · · · · ·     · · *
+> ```
+> ````
+> ```goat
+>  o o o o o  * * * * *  * * o o *    o o o      * * *      o o o     · * · · ·     · · ·
+>  o o o o o  * * * * *  o o o o *   o o o o    * * * *    * o * *    · * * · ·    · · · ·
+>  o o o o o  * * * * *  o * o o o  o o o o o  * * * * *  o o o o o   · o · · o   · · * * ·
+>  o o o o o  * * * * *  o * o o o   o o o o    * * * *    o * o o    · · · · o    · · * ·
+>  o o o o o  * * * * *  * * * * o    o o o      * * *      o * o     · · · · ·     · · *
+> ```
+>
+> Large Nodes:
+> ````md {data-open=false}
+> ```goat
+>  .---.       .-.        .-.       .-.                                       .-.
+>  | A +----->| 1 +<---->| 2 |<----+ 4 +------------------.                  | 8 |
+>  '---'       '-'        '+'       '-'                    |                  '-'
+>                          |         ^                     |                   ^
+>                          v         |                     v                   |
+>                         .-.      .-+-.        .-.      .-+-.      .-.       .+.       .---.
+>                        | 3 +---->| B |<----->| 5 +---->| C +---->| 6 +---->| 7 |<---->| D |
+>                         '-'      '---'        '-'      '---'      '-'       '-'       '---'
+> ```
+> ````
+> ```goat
+>  .---.       .-.        .-.       .-.                                       .-.
+>  | A +----->| 1 +<---->| 2 |<----+ 4 +------------------.                  | 8 |
+>  '---'       '-'        '+'       '-'                    |                  '-'
+>                          |         ^                     |                   ^
+>                          v         |                     v                   |
+>                         .-.      .-+-.        .-.      .-+-.      .-.       .+.       .---.
+>                        | 3 +---->| B |<----->| 5 +---->| C +---->| 6 +---->| 7 |<---->| D |
+>                         '-'      '---'        '-'      '---'      '-'       '-'       '---'
+> ```
+>
+> Small Grids:
+> ````md {data-open=false}
+> ```goat
+>       ___     ___      .---+---+---+---+---.     .---+---+---+---.  .---.   .---.
+>   ___/   \___/   \     |   |   |   |   |   |    / \ / \ / \ / \ /   |   +---+   |
+>  /   \___/   \___/     +---+---+---+---+---+   +---+---+---+---+    +---+   +---+
+>  \___/ b \___/   \     |   |   | b |   |   |    \ / \a/ \b/ \ / \   |   +---+   |
+>  / a \___/   \___/     +---+---+---+---+---+     +---+---+---+---+  +---+ b +---+
+>  \___/   \___/   \     |   | a |   |   |   |    / \ / \ / \ / \ /   | a +---+   |
+>      \___/   \___/     '---+---+---+---+---'   '---+---+---+---'    '---'   '---'
+> ```
+> ````
+> ```goat
+>       ___     ___      .---+---+---+---+---.     .---+---+---+---.  .---.   .---.
+>   ___/   \___/   \     |   |   |   |   |   |    / \ / \ / \ / \ /   |   +---+   |
+>  /   \___/   \___/     +---+---+---+---+---+   +---+---+---+---+    +---+   +---+
+>  \___/ b \___/   \     |   |   | b |   |   |    \ / \a/ \b/ \ / \   |   +---+   |
+>  / a \___/   \___/     +---+---+---+---+---+     +---+---+---+---+  +---+ b +---+
+>  \___/   \___/   \     |   | a |   |   |   |    / \ / \ / \ / \ /   | a +---+   |
+>      \___/   \___/     '---+---+---+---+---'   '---+---+---+---'    '---'   '---'
+> ```
+>
+> Big Grids:
+> ````md {data-open=false}
+> ```goat
+>    .----.        .----.
+>   /      \      /      \            .-----+-----+-----.
+>  +        +----+        +----.      |     |     |     |          .-----+-----+-----+-----+
+>   \      /      \      /      \     |     |     |     |         /     /     /     /     /
+>    +----+   B    +----+        +    +-----+-----+-----+        +-----+-----+-----+-----+
+>   /      \      /      \      /     |     |     |     |       /     /     /     /     /
+>  +   A    +----+        +----+      |     |  B  |     |      +-----+-----+-----+-----+
+>   \      /      \      /      \     +-----+-----+-----+     /     /  A  /  B  /     /
+>    '----+        +----+        +    |     |     |     |    +-----+-----+-----+-----+
+>          \      /      \      /     |  A  |     |     |   /     /     /     /     /
+>           '----'        '----'      '-----+-----+-----'  '-----+-----+-----+-----+
+> ```
+> ````
+> ```goat
+>    .----.        .----.
+>   /      \      /      \            .-----+-----+-----.
+>  +        +----+        +----.      |     |     |     |          .-----+-----+-----+-----+
+>   \      /      \      /      \     |     |     |     |         /     /     /     /     /
+>    +----+   B    +----+        +    +-----+-----+-----+        +-----+-----+-----+-----+
+>   /      \      /      \      /     |     |     |     |       /     /     /     /     /
+>  +   A    +----+        +----+      |     |  B  |     |      +-----+-----+-----+-----+
+>   \      /      \      /      \     +-----+-----+-----+     /     /  A  /  B  /     /
+>    '----+        +----+        +    |     |     |     |    +-----+-----+-----+-----+
+>          \      /      \      /     |  A  |     |     |   /     /     /     /     /
+>           '----'        '----'      '-----+-----+-----'  '-----+-----+-----+-----+
+> ```
+>
+> Complicated:
+> ````md {data-open=false}
+> ```goat
+> +-------------------+                           ^                      .---.
+> |    A Box          |__.--.__    __.-->         |      .-.             |   |
+> |                   |        '--'               v     | * |<---        |   |
+> +-------------------+                                  '-'             |   |
+>                        Round                                       *---(-. |
+>   .-----------------.  .-------.    .----------.         .-------.     | | |
+>  |   Mixed Rounded  | |         |  / Diagonals  \        |   |   |     | | |
+>  | & Square Corners |  '--. .--'  /              \       |---+---|     '-)-'       .--------.
+>  '--+------------+-'  .--. |     '-------+--------'      |   |   |       |        / Search /
+>     |            |   |    | '---.        |               '-------'       |       '-+------'
+>     |<---------->|   |    |      |       v                Interior                 |     ^
+>     '           <---'      '----'   .-----------.              ---.     .---       v     |
+>  .------------------.  Diag line    | .-------. +---.              \   /           .     |
+>  |   if (a > b)     +---.      .--->| |       | |    | Curved line  \ /           / \    |
+>  |   obj->fcn()     |    \    /     | '-------' |<--'                +           /   \   |
+>  '------------------'     '--'      '--+--------'      .--. .--.     |  .-.     +Done?+-'
+>     .---+-----.                        |   ^           |\ | | /|  .--+ |   |     \   /
+>     |   |     | Join        \|/        |   | Curved    | \| |/ | |    \    |      \ /
+>     |   |     +---->  o    --o--        '-'  Vertical  '--' '--'  '--  '--'        +  .---.
+>  <--+---+-----'       |     /|\                                                    |  | 3 |
+>                       v                             not:line    'quotes'        .-'   '---'
+>   .-.             .---+--------.            /            A || B   *bold*       |        ^
+>  |   |           |   Not a dot  |      <---+---<--    A dash--is not a line    v        |
+>   '-'             '---------+--'          /           Nor/is this.            ---
+> ```
+> ````
+> ```goat
+> +-------------------+                           ^                      .---.
+> |    A Box          |__.--.__    __.-->         |      .-.             |   |
+> |                   |        '--'               v     | * |<---        |   |
+> +-------------------+                                  '-'             |   |
+>                        Round                                       *---(-. |
+>   .-----------------.  .-------.    .----------.         .-------.     | | |
+>  |   Mixed Rounded  | |         |  / Diagonals  \        |   |   |     | | |
+>  | & Square Corners |  '--. .--'  /              \       |---+---|     '-)-'       .--------.
+>  '--+------------+-'  .--. |     '-------+--------'      |   |   |       |        / Search /
+>     |            |   |    | '---.        |               '-------'       |       '-+------'
+>     |<---------->|   |    |      |       v                Interior                 |     ^
+>     '           <---'      '----'   .-----------.              ---.     .---       v     |
+>  .------------------.  Diag line    | .-------. +---.              \   /           .     |
+>  |   if (a > b)     +---.      .--->| |       | |    | Curved line  \ /           / \    |
+>  |   obj->fcn()     |    \    /     | '-------' |<--'                +           /   \   |
+>  '------------------'     '--'      '--+--------'      .--. .--.     |  .-.     +Done?+-'
+>     .---+-----.                        |   ^           |\ | | /|  .--+ |   |     \   /
+>     |   |     | Join        \|/        |   | Curved    | \| |/ | |    \    |      \ /
+>     |   |     +---->  o    --o--        '-'  Vertical  '--' '--'  '--  '--'        +  .---.
+>  <--+---+-----'       |     /|\                                                    |  | 3 |
+>                       v                             not:line    'quotes'        .-'   '---'
+>   .-.             .---+--------.            /            A || B   *bold*       |        ^
+>  |   |           |   Not a dot  |      <---+---<--    A dash--is not a line    v        |
+>   '-'             '---------+--'          /           Nor/is this.            ---
+> ```
+
+#### Mermaid
+
+[Mermaid](https://mermaid.js.org/) 是一个基于 JavaScript 的图表工具, 它允许你使用文本和代码创建图表和可视化.
+
+要使用 Mermaid, 只需将 Mermaid 的代码输入放在代码块中, 并将语言设置为 mermaid.
+
+> [!Example]-
+> Flowchart:
+> ````md {data-open=false}
+> ```mermaid
+> graph TD;
+>     A-->B;
+>     A-->C;
+>     B-->D;
+>     C-->D;
+> ```
+> ````
+> ```mermaid
+> graph TD;
+>     A-->B;
+>     A-->C;
+>     B-->D;
+>     C-->D;
+> ```
+>
+> Sequence diagram:
+> ````md {data-open=false}
+> ```mermaid
+> sequenceDiagram
+>     participant Alice
+>     participant Bob
+>     Alice->>John: Hello John, how are you?
+>     loop HealthCheck
+>         John->>John: Fight against hypochondria
+>     end
+>     Note right of John: Rational thoughts <br/>prevail!
+>     John-->>Alice: Great!
+>     John->>Bob: How about you?
+>     Bob-->>John: Jolly good!
+> ```
+> ````
+> ```mermaid
+> sequenceDiagram
+>     participant Alice
+>     participant Bob
+>     Alice->>John: Hello John, how are you?
+>     loop HealthCheck
+>         John->>John: Fight against hypochondria
+>     end
+>     Note right of John: Rational thoughts <br/>prevail!
+>     John-->>Alice: Great!
+>     John->>Bob: How about you?
+>     Bob-->>John: Jolly good!
+> ```
+>
+> Gantt diagram:
+> ````md {data-open=false}
+> ```mermaid
+> gantt
+> dateFormat  YYYY-MM-DD
+> title Adding GANTT diagram to mermaid
+> excludes weekdays 2014-01-10
+>
+> section A section
+> Completed task            :done,    des1, 2014-01-06,2014-01-08
+> Active task               :active,  des2, 2014-01-09, 3d
+> Future task               :         des3, after des2, 5d
+> Future task2               :         des4, after des3, 5d
+> ```
+> ````
+> ```mermaid
+> gantt
+> dateFormat  YYYY-MM-DD
+> title Adding GANTT diagram to mermaid
+> excludes weekdays 2014-01-10
+>
+> section A section
+> Completed task            :done,    des1, 2014-01-06,2014-01-08
+> Active task               :active,  des2, 2014-01-09, 3d
+> Future task               :         des3, after des2, 5d
+> Future task2               :         des4, after des3, 5d
+> ```
+>
+> Class diagram:
+> ````md {data-open=false}
+> ```mermaid
+> classDiagram
+> Class01 <|-- AveryLongClass : Cool
+> Class03 *-- Class04
+> Class05 o-- Class06
+> Class07 .. Class08
+> Class09 --> C2 : Where am i?
+> Class09 --* C3
+> Class09 --|> Class07
+> Class07 : equals()
+> Class07 : Object[] elementData
+> Class01 : size()
+> Class01 : int chimp
+> Class01 : int gorilla
+> Class08 <--> C2: Cool label
+> ```
+> ````
+> ```mermaid
+> classDiagram
+> Class01 <|-- AveryLongClass : Cool
+> Class03 *-- Class04
+> Class05 o-- Class06
+> Class07 .. Class08
+> Class09 --> C2 : Where am i?
+> Class09 --* C3
+> Class09 --|> Class07
+> Class07 : equals()
+> Class07 : Object[] elementData
+> Class01 : size()
+> Class01 : int chimp
+> Class01 : int gorilla
+> Class08 <--> C2: Cool label
+> ```
+>
+> Git graph
+> ````md {data-open=false}
+> ```mermaid
+> gitGraph
+>     commit
+>     branch hotfix
+>     checkout hotfix
+>     commit
+>     branch develop
+>     checkout develop
+>     commit id:"ash" tag:"abc"
+>     branch featureB
+>     checkout featureB
+>     commit type:HIGHLIGHT
+>     checkout main
+>     checkout hotfix
+>     commit type:NORMAL
+>     checkout develop
+>     commit type:REVERSE
+>     checkout featureB
+>     commit
+>     checkout main
+>     merge hotfix
+>     checkout featureB
+>     commit
+>     checkout develop
+>     branch featureA
+>     commit
+>     checkout develop
+>     merge hotfix
+>     checkout featureA
+>     commit
+>     checkout featureB
+>     commit
+>     checkout develop
+>     merge featureA
+>     branch release
+>     checkout release
+>     commit
+>     checkout main
+>     commit
+>     checkout release
+>     merge main
+>     checkout develop
+>     merge release
+> ```
+> ````
+> ```mermaid
+> gitGraph
+>     commit
+>     branch hotfix
+>     checkout hotfix
+>     commit
+>     branch develop
+>     checkout develop
+>     commit id:"ash" tag:"abc"
+>     branch featureB
+>     checkout featureB
+>     commit type:HIGHLIGHT
+>     checkout main
+>     checkout hotfix
+>     commit type:NORMAL
+>     checkout develop
+>     commit type:REVERSE
+>     checkout featureB
+>     commit
+>     checkout main
+>     merge hotfix
+>     checkout featureB
+>     commit
+>     checkout develop
+>     branch featureA
+>     commit
+>     checkout develop
+>     merge hotfix
+>     checkout featureA
+>     commit
+>     checkout featureB
+>     commit
+>     checkout develop
+>     merge featureA
+>     branch release
+>     checkout release
+>     commit
+>     checkout main
+>     commit
+>     checkout release
+>     merge main
+>     checkout develop
+>     merge release
+> ```
+>
+> Entity Relationship Diagram(❗experimental):
+> ````md {data-open=false}
+> ```mermaid
+> erDiagram
+>     CUSTOMER ||--o{ ORDER : places
+>     ORDER ||--|{ LINE-ITEM : contains
+>     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+> ```
+> ````
+> ```mermaid
+> erDiagram
+>     CUSTOMER ||--o{ ORDER : places
+>     ORDER ||--|{ LINE-ITEM : contains
+>     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+> ```
+>
+> User Journey Diagram
+> ````md {data-open=false}
+> ```mermaid
+> journey
+>     title My working day
+>     section Go to work
+>       Make tea: 5: Me
+>       Go upstairs: 3: Me
+>       Do work: 1: Me, Cat
+>     section Go home
+>       Go downstairs: 5: Me
+>       Sit down: 5: Me
+> ```
+> ````
+> ```mermaid
+> journey
+>     title My working day
+>     section Go to work
+>       Make tea: 5: Me
+>       Go upstairs: 3: Me
+>       Do work: 1: Me, Cat
+>     section Go home
+>       Go downstairs: 5: Me
+>       Sit down: 5: Me
+> ```
+>
+> Quadrant Chart:
+> ````md {data-open=false}
+> ```mermaid
+> quadrantChart
+>     title Reach and engagement of campaigns
+>     x-axis Low Reach --> High Reach
+>     y-axis Low Engagement --> High Engagement
+>     quadrant-1 We should expand
+>     quadrant-2 Need to promote
+>     quadrant-3 Re-evaluate
+>     quadrant-4 May be improved
+>     Campaign A: [0.3, 0.6]
+>     Campaign B: [0.45, 0.23]
+>     Campaign C: [0.57, 0.69]
+>     Campaign D: [0.78, 0.34]
+>     Campaign E: [0.40, 0.34]
+>     Campaign F: [0.35, 0.78]
+> ```
+> ````
+> ```mermaid
+> quadrantChart
+>     title Reach and engagement of campaigns
+>     x-axis Low Reach --> High Reach
+>     y-axis Low Engagement --> High Engagement
+>     quadrant-1 We should expand
+>     quadrant-2 Need to promote
+>     quadrant-3 Re-evaluate
+>     quadrant-4 May be improved
+>     Campaign A: [0.3, 0.6]
+>     Campaign B: [0.45, 0.23]
+>     Campaign C: [0.57, 0.69]
+>     Campaign D: [0.78, 0.34]
+>     Campaign E: [0.40, 0.34]
+>     Campaign F: [0.35, 0.78]
+> ```
+>
+> XY Chart:
+> ````md {data-open=false}
+> ```mermaid
+> xychart-beta
+>     title "Sales Revenue"
+>     x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+>     y-axis "Revenue (in $)" 4000 --> 11000
+>     bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+>     line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+> ```
+> ````
+> ```mermaid
+> xychart-beta
+>     title "Sales Revenue"
+>     x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+>     y-axis "Revenue (in $)" 4000 --> 11000
+>     bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+>     line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+> ```
+>
+> Pie chart diagrams:
+> ````md {data-open=false}
+> ```mermaid
+> pie title Pets adopted by volunteers
+>     "Dogs" : 386
+>     "Cats" : 85
+>     "Rats" : 15
+> ```
+> ````
+> ```mermaid
+> pie title Pets adopted by volunteers
+>     "Dogs" : 386
+>     "Cats" : 85
+>     "Rats" : 15
+> ```
+>
+> Requirement Diagram:
+> ````md {data-open=false}
+> ```mermaid
+>     requirementDiagram
+>
+>     requirement test_req {
+>     id: 1
+>     text: the test text.
+>     risk: high
+>     verifymethod: test
+>     }
+>
+>     element test_entity {
+>     type: simulation
+>     }
+>
+>     test_entity - satisfies -> test_req
+> ```
+> ````
+> ```mermaid
+>     requirementDiagram
+>
+>     requirement test_req {
+>     id: 1
+>     text: the test text.
+>     risk: high
+>     verifymethod: test
+>     }
+>
+>     element test_entity {
+>     type: simulation
+>     }
+>
+>     test_entity - satisfies -> test_req
+> ```
+>
+> Mindmap:
+> ````md {data-open=false}
+> ```mermaid
+> mindmap
+>   root((mindmap))
+>     Origins
+>       Long history
+>       ::icon(fa fa-book)
+>       Popularisation
+>         British popular psychology author Tony Buzan
+>     Research
+>       On effectiveness<br/>and features
+>       On Automatic creation
+>         Uses
+>             Creative techniques
+>             Strategic planning
+>             Argument mapping
+>     Tools
+>       Pen and paper
+>       Mermaid
+> ```
+> ````
+> ```mermaid
+> mindmap
+>   root((mindmap))
+>     Origins
+>       Long history
+>       ::icon(fa fa-book)
+>       Popularisation
+>         British popular psychology author Tony Buzan
+>     Research
+>       On effectiveness<br/>and features
+>       On Automatic creation
+>         Uses
+>             Creative techniques
+>             Strategic planning
+>             Argument mapping
+>     Tools
+>       Pen and paper
+>       Mermaid
+> ```
+>
+> Packet Diagram:
+> ````md {data-open=false}
+> ```mermaid
+> packet-beta
+> title UDP Packet
+> 0-15: "Source Port"
+> 16-31: "Destination Port"
+> 32-47: "Length"
+> 48-63: "Checksum"
+> 64-95: "Data (variable length)"
+> ```
+> ````
+> ```mermaid
+> packet-beta
+> title UDP Packet
+> 0-15: "Source Port"
+> 16-31: "Destination Port"
+> 32-47: "Length"
+> 48-63: "Checksum"
+> 64-95: "Data (variable length)"
+> ```
+>
+> Architecture Diagrams Documentation:
+> ````md {data-open=false}
+> ```mermaid
+> architecture-beta
+>     group api(cloud)[API]
+>
+>     service db(database)[Database] in api
+>     service disk1(disk)[Storage] in api
+>     service disk2(disk)[Storage] in api
+>     service server(server)[Server] in api
+>
+>     db:L -- R:server
+>     disk1:T -- B:server
+>     disk2:T -- B:db
+> ```
+> ````
+> ```mermaid
+> architecture-beta
+>     group api(cloud)[API]
+>
+>     service db(database)[Database] in api
+>     service disk1(disk)[Storage] in api
+>     service disk2(disk)[Storage] in api
+>     service server(server)[Server] in api
+>
+>     db:L -- R:server
+>     disk1:T -- B:server
+>     disk2:T -- B:db
+> ```
+> 还有许多其他类型的图, 具体内容可查看 [mermaid 官网](https://mermaid.js.org/).
+
+#### Timeline
+
+Timeline 可拆分成多个按照时间戳正序或倒序排列的事件, 时间戳和内容是必填项. 更多内容请查看 [FixIt 官网](https://fixit.lruihao.cn/zh-cn/documentation/content-management/timeline-support/).
+
+> [!Example]-
+> ````md
+> ```timeline {reverse=true, animation=true}
+> events:
+>   - timestamp: 2021-12-18T16:15:22+08:00
+>     content: "Feat: [LoveIt](https://github.com/dillonzq/LoveIt) => [FixIt](https://github.com/hugo-fixit/FixIt)"
+>     type: primary
+>   - timestamp: 2021-12-19T19:48:23+08:00
+>     content: "⬆️ Chore: update 0.2.11"
+>   - timestamp: 2021-12-19T19:48:23+08:00
+>     content: "<span class=\"text-secondary\">:(fa-regular fa-comment-dots): Developed for a long time...</span>"
+>     hideTimestamp: true
+>     type: secondary
+>   - timestamp: 2024-01-01T14:54:19+08:00
+>     content: "🔖 Chore(release): 0.3.0"
+>     type: success
+>   - timestamp: 2024-05-20T14:54:19+08:00
+>     content: "<span class=\"text-secondary\">:(fa-regular fa-comment-dots): Half a year later...</span>"
+>     hideTimestamp: true
+>     type: secondary
+>   - timestamp: 2024-07-20T22:28:19+08:00
+>     content: "🎉 Feat: add timeline support for code blocks"
+>     type: danger
+> ```
+> ````
+> ```timeline {reverse=true, animation=true}
+> events:
+>   - timestamp: 2021-12-18T16:15:22+08:00
+>     content: "Feat: [LoveIt](https://github.com/dillonzq/LoveIt) => [FixIt](https://github.com/hugo-fixit/FixIt)"
+>     type: primary
+>   - timestamp: 2021-12-19T19:48:23+08:00
+>     content: "⬆️ Chore: update 0.2.11"
+>   - timestamp: 2021-12-19T19:48:23+08:00
+>     content: "<span class=\"text-secondary\">:(fa-regular fa-comment-dots): Developed for a long time...</span>"
+>     hideTimestamp: true
+>     type: secondary
+>   - timestamp: 2024-01-01T14:54:19+08:00
+>     content: "🔖 Chore(release): 0.3.0"
+>     type: success
+>   - timestamp: 2024-05-20T14:54:19+08:00
+>     content: "<span class=\"text-secondary\">:(fa-regular fa-comment-dots): Half a year later...</span>"
+>     hideTimestamp: true
+>     type: secondary
+>   - timestamp: 2024-07-20T22:28:19+08:00
+>     content: "🎉 Feat: add timeline support for code blocks"
+>     type: danger
+> ```
+
+## ShortCode
+
 TO BE CONTINUED...
 
+
+---
+{.awesome-hr}
 
 
 markdown 插入图片:
@@ -440,47 +1392,6 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 [^ 博客内引用]: https://gohugo.io/shortcodes/ref/ and https://gohugo.io/shortcodes/relref/
 ---
 
-- [ ] 这是代办项目.
-    - [ ] 缩进测试.
-        - [x] 缩进测试.
-- [x] 这是已办项目.
-
----
-<!-- 单行注释测试 -->
-
-<!--
-多行
-注释
-测试
--->
-
-```markdown
-<!-- 单行注释测试 -->
-
-<!--
-多行
-注释
-测试
--->
-```
-
----
-
-```markdown
-[哔哩哔哩][变量名]
-
-[变量名]: https://www.bilibili.com
-```
-
-[哔哩哔哩][变量名]
-
-[变量名]: https://www.bilibili.com
-
----
-
-脚注测试[^变量名].
-
-[^变量名]: 这是脚注.
 
 ---
 
@@ -661,14 +1572,20 @@ Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
     a^*=x-b^*.
 \]
 
-4.
+4. 化学方程式:
+
 *code*:
 ```latex
-化学方程式：
-\ce{CO2 + C -> 2CO}
+\begin{aligned}
+\ce{CO2 + C -> 2CO}\\
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+\end{aligned}
 ```
 \[
-\ce{CO2 + C -> 2CO}
+\begin{aligned}
+&\ce{CO2 + C -> 2CO}\\
+&\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+\end{aligned}
 \]
 
 ### physics 宏包
