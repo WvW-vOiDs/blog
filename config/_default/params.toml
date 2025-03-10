@@ -42,7 +42,7 @@ disableThemeInject = false
 [author]
   name = "WvW-vOiDs"
   email = "voidsofficial@outlook.com"
-  link = "https://github.com/WvW-vOiDs"
+  link = "https://WvW-vOiDs.github.io/"
   avatar = ""
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
