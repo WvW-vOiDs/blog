@@ -14,9 +14,9 @@ slug: "test-demo"
 
 
 
-description: "Description 将会在 single page 展示. 本文用于测试网站功能."
+description: "Description 将会在 single page 展示. 本文用于测试网站功能." # 文章内容的描述
 summary: "Summary 将会在list page展示. 本文用于测试网站功能."
-# hideSummary: false # 如果写summary就取消注释
+hideSummary: false # 如果写summary就取消注释
 
 tags: ["markdown", "Hugo", "TODO"] # 关键词
 categories: ["Draft"] # 文件夹结构
@@ -211,6 +211,10 @@ FixIt 有两种类型的 Callouts:
 > > [!warning] Everything is not ok.
 > ...
 > ```
+> 只要包含空格, 数字, 汉字或者符号(连字符, 下划线, 句号)就不能使用以下方式自定义 callout
+> ```md
+> > [!Everythingisok]
+> ```
 
 FixIt 支持在配置文件中[自定义 callout](https://fixit.lruihao.cn/zh-cn/documentation/advanced/#custom-admonitions). FixIt 主题原生支持以下类型扩展版 callouts.
 
@@ -327,10 +331,11 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 
 同 callout, FixIt 支持[自定义待办事项](https://fixit.lruihao.cn/zh-cn/documentation/advanced/#custom-task-lists).
 
-### 下划线, 高亮 和 上下标
+### 删除线, 下划线, 高亮 和 上下标
 
-在 加粗, 斜体, 删除线 的基础 markdown 语法上, FixIt 定义了类似的扩展语法:
+在 加粗, 斜体 的基础 markdown 语法上, Hugo 定义了类似的[扩展语法](https://gohugo.io/configuration/markup/#extras):
 ```md {data-open=true}
+这是~~删除线~~.
 这是++下划线++.
 这是==高亮==.
 这是^上标^.
@@ -345,6 +350,7 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 ==Danger==[danger]
 ```
 > [!Example]-
+> 这是~~删除线~~.<br>
 > 这是++下划线++.<br>
 > 这是==高亮==.<br>
 > 这是^上标^.[^禁用上标]<br>
@@ -482,7 +488,7 @@ console.log('hello FixIt!');
 ```
 
 <!-- highlight -->
-```go {hl_lines=[3,"6-8"] style=emacs}
+```go {hl_lines=[3,"6-8"]}
 package main
 
 import "fmt"
@@ -1362,114 +1368,40 @@ html 插入图片:
 
 ---
 
-|这里是表头1|这里是表头2|这里是表头3|
-|:-|:-:|-:|
-|单元格数据1|单元格数据2|单元格数据3|
-|居左|居中|居右|
-|1|可以使用`<br>`<br>换行|1|
-
----
-
-`````markdown
-代码块的嵌套:
-````markdown
-可以再嵌套一层:
-```markdown
-中间的也是代码块
-```
-````
-`````
-``` 行内代码的`` 嵌套 `测试` `` ```
-
 LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 
 ---
 
-博客内文章引用测试 (使用内置 short code 实现[^ 博客内引用]):
-
-代码块更多效果见下文[代码测试]({{< ref "#代码测试" >}} "代码测试")
-
-[^ 博客内引用]: https://gohugo.io/shortcodes/ref/ and https://gohugo.io/shortcodes/relref/
----
-
-
----
-
-常用 html 代码:
-
+## 常用 html 代码
+```md
 <small>这是一段缩小文本</small> vs. 普通大小 vs. <big>放大文本</big>
 
 <font color=orange>橘色文本</font> vs. <font color=teal>水鸭色文本</font>
-
-==高亮== vs. <mark>高亮</mark>
-
----
-
-中文“引号” vs. 英文"引号"
-
----
-
-:smile: vs. 😄
-
-> PS: 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入emoji. 但无论true or false 都不影响直接输入 unicode版 emoji.
-
----
-
-转义字符测试:
-\\ \* \_ \# \-
-
----
 
 文本间的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多个空格, 通过 html代码`&nbsp;` 实现.
 
 文本间的换行<br><br><br><br><br>使用`<br>`实现.
 
----
+```
+> [!Example]-
+> <small>这是一段缩小文本</small> vs. 普通大小 vs. <big>放大文本</big>
+>
+> <font color=orange>橘色文本</font> vs. <font color=teal>水鸭色文本</font>
+>
+> 文本间的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多个空格, 通过 html代码`&nbsp;` 实现.
+>
+> 文本间的换行<br><br><br><br><br>使用`<br>`实现.
 
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
 
-> [!TIP]
-> Helpful advice for doing things better or more easily.
+## 其他细节
 
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
+中文“引号” vs. 英文"引号"
 
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
+:smile: vs. 😄
 
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
+> [!Note]
+> 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入emoji. 但无论true or false 都不影响直接输入 unicode版 emoji.
 
-> [!WARNING]+ Radiation hazard
-> Do not approach or handle without protective gear.
-
----
-
-- [ ] 未完成
-- [x] 已完成
-- [/] 进行中
-- [-] 已取消
-- [<] 已计划
-- [>] 已重新计划
-- [!] 重要
-- [?] 问题
-
----
-
-[extras](https://gohugo.io/getting-started/configuration-markup/#extras):
-
-~~foo~~
-
-++bar++
-
-==baz==
-
-H~2~O
-
-1^st^
-
----
 <!--
 音频嵌入测试:
 
@@ -1482,42 +1414,6 @@ H~2~O
 <!-- 网页嵌入测试:
 
 <iframe width=720 height=400 src="https://www.bilibili.com/" scrolling="auto" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
-
----
-
-GoAT diagrams:
-```goat
-+-------------------+                           ^                      .---.
-|    A Box          |__.--.__    __.-->         |      .-.             |   |
-|                   |        '--'               v     | * |<---        |   |
-+-------------------+                                  '-'             |   |
-                       Round                                       *---(-. |
-  .-----------------.  .-------.    .----------.         .-------.     | | |
- |   Mixed Rounded  | |         |  / Diagonals  \        |   |   |     | | |
- | & Square Corners |  '--. .--'  /              \       |---+---|     '-)-'       .--------.
- '--+------------+-'  .--. |     '-------+--------'      |   |   |       |        / Search /
-    |            |   |    | '---.        |               '-------'       |       '-+------'
-    |<---------->|   |    |      |       v                Interior                 |     ^
-    '           <---'      '----'   .-----------.              ---.     .---       v     |
- .------------------.  Diag line    | .-------. +---.              \   /           .     |
- |   if (a > b)     +---.      .--->| |       | |    | Curved line  \ /           / \    |
- |   obj->fcn()     |    \    /     | '-------' |<--'                +           /   \   |
- '------------------'     '--'      '--+--------'      .--. .--.     |  .-.     +Done?+-'
-    .---+-----.                        |   ^           |\ | | /|  .--+ |   |     \   /
-    |   |     | Join        \|/        |   | Curved    | \| |/ | |    \    |      \ /
-    |   |     +---->  o    --o--        '-'  Vertical  '--' '--'  '--  '--'        +  .---.
- <--+---+-----'       |     /|\                                                    |  | 3 |
-                      v                             not:line    'quotes'        .-'   '---'
-  .-.             .---+--------.            /            A || B   *bold*       |        ^
- |   |           |   Not a dot  |      <---+---<--    A dash--is not a line    v        |
-  '-'             '---------+--'          /           Nor/is this.            ---
-```
-
----
-
-Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
-[^hugo_diagram]: https://gohugo.io/content-management/diagrams/
-
 ---
 
 
@@ -1622,7 +1518,7 @@ Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
 
 3. 带有 `<` 的公式.
 
-> 注意!
+> [!Warning]
 >
 > `<` 后 **一定** 要接一个空格 (或使用 `\lt` 代替 `<` 以强制提醒自己加空格), 否则会当成 html 的标签而无法渲染.[^无法渲染]
 
@@ -1662,7 +1558,6 @@ Hugo does not provide a built-in template for Mermaid diagrams.[^hugo_diagram]
 \[
     \boldsymbol{x}_{i+1} + \boldsymbol{x}_{i+2} = \boldsymbol{x}_{i+3}
 \]
-
 
 ## 代码测试
 
