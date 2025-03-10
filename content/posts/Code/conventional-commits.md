@@ -9,7 +9,7 @@ title: "Conventional Commits"
 slug: "conventional-commits"
 
 tags: ["git", "blog"]
-# categories: [] # 舍弃使用, 通过文件夹结构确定 category
+categories: ["Code"]
 
 # description: "Description 将会在single page顶部展示."
 # summary: "Summary 将会在list page展示."

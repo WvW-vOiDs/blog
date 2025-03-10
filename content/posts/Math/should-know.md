@@ -9,7 +9,7 @@ title: "Should Know"
 slug: "should-know"
 
 tags: []
-# categories: [] # 舍弃使用, 通过文件夹结构确定 category
+categories: ["Math"]
 
 # description: "Description 将会在single page顶部展示."
 # summary: "Summary 将会在list page展示."
