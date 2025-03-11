@@ -1353,17 +1353,22 @@ html 插入图片:
 
 <iframe
     src="https://sli.dev/demo/starter"
+    allow="fullscreen"
+    allowfullscreen
     style="width: 100%; aspect-ratio: 16/9; border: none;"
 ></iframe>
 
 参考了 [Thomas Boerger](https://github.com/tboerger/talks), [Anthony Fu](https://github.com/antfu/talks), [Haili Zhang](https://github.com/webup/openfunction-talks) 等人的项目.
 
-- beamer (deepseek-r1 生成)
+- beamer (通过 slidev 展示)
+
+> 暂时没找到比较好的演示加教程, 先用随便找的一篇占位.
 
 <iframe
-    id="deepseek-r1 生成"
-    src="./slides/beamer/main.pdf#toolbar=1"
-    style="width: 100%; aspect-ratio: 16/10; border: none;"
+    src="https://wvw-voids.github.io/slides/The-beamer-class-for-LATEX"
+    allow="fullscreen"
+    allowfullscreen
+    style="width: 100%; aspect-ratio: 4/3; border: none;"
 ></iframe>
 
 ---
