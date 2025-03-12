@@ -1320,6 +1320,12 @@ TO BE CONTINUED...
 {.awesome-hr}
 
 
+---
+
+个人隐私 blog 通过 submodule 导入到 repository 中, 并通过 .gitignore 不部署到网站上. submodule 通过[本地加密](https://github.com/AGWA/git-crypt)更新.
+
+---
+
 markdown 插入图片:
 
 ![随机图床](https://t.alcy.cc/ycy "随机图床")
