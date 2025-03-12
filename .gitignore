@@ -6,3 +6,6 @@ resources/
 .hugo_build.lock
 _vendor
 jsconfig.json
+
+# 个人隐私 blog 不部署到网站上
+content/posts/private/
