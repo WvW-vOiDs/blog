@@ -1,4 +1,19 @@
-# 常用命令
+## 常用命令
+
+### 首次 clone
+
+```bash
+git clone --recurse-submodules https://github.com/WvW-vOiDs/blog.git
+```
+
+或
+
+```bash
+git clone --recurse-submodules https://github.com/WvW-vOiDs/blog.git
+git submodule update --init --recursive
+```
+
+### 日常使用
 
 - 本地 build
 
@@ -12,7 +27,7 @@
 git submodule update --remote --merge themes/FixIt
 ```
 
-# Conventional commit
+## Conventional commit
 
 | 标准类型               | 功能                                                                 |
 |-----------------     |----------------------------------------------------------------------|
