@@ -9,6 +9,8 @@ on:
       - 'data/**'
       - 'static/**'
       - 'themes/**'
+    paths-ignore:        # 忽略私有目录
+      - 'content/posts/private/**'
   workflow_run:
     workflows: ['Update theme']
     types:
