@@ -9,7 +9,6 @@ on:
       - 'data/**'
       - 'static/**'
       - 'themes/**'
-      - '!content/posts/private/**'
   workflow_run:
     workflows: ['Update theme']
     types:
