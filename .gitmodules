@@ -4,4 +4,4 @@
 	branch = main
 [submodule "content/posts/private"]
 	path = content/posts/private
-	url = https://github.com/wvw-voids/private-blog.git
+	url = git@github.com:WvW-vOiDs/private-blog.git
