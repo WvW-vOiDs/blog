@@ -716,9 +716,9 @@ disableThemeInject = false
   # If true, save the reading progress when closing the page.
   autoBookmark = false
   # FixIt 0.2.17 | NEW whether to enable wordCount
-  wordCount = false
+  wordCount = true
   # FixIt 0.2.17 | NEW whether to enable readingTime
-  readingTime = false
+  readingTime = true
   # FixIt 0.2.17 | NEW end of post flag
   endFlag = "End."
   # FixIt 0.2.18 | NEW whether to enable instant.page
