@@ -3,7 +3,7 @@
 #                                 main settings                                #
 # **************************************************************************** #
 
-title: '{{ replace .TranslationBaseName "-" " " | title }}'
+title: '{{ replace .ContentBaseName "-" " " | title }}'
 # subtitle: ""
 slug: '{{ substr .File.UniqueID 0 7 }}' # 使用小写并且用 `-` 替换空格
 
