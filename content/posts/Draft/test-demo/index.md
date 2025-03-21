@@ -4,15 +4,7 @@
 # **************************************************************************** #
 date: "2024-12-30T12:03:13+08:00"
 title: "Test Demo"
-# subtitle: "Subtitle"
 slug: "test-demo"
-# author:
-#     name: "Me" # 文章作者
-#     link: "https://example.com" # 文章作者的链接
-#     email: "me@me.com" # 文章作者的邮箱，用于设置 Gravatar 头像，优先于 `author.avatar`
-#     avatar: "" # 文章作者的头像
-
-
 
 description: "Description 将会在 single page 展示. 本文用于测试网站功能." # 文章内容的描述
 summary: "Summary 将会在list page展示. 本文用于测试网站功能."
@@ -33,21 +25,15 @@ draft: false
 # ShowToc: false # 默认 true
 # TocOpen: false # 默认 true
 
-# ShowReadingTime: true # 默认 false
-# ShowWordCount: true # 默认 false
+# readingTime: false # 默认 true
+# wordCount: false # 默认 true
 
 # ================================== search ================================== #
 # searchHidden: true # 默认 false
 
 # =================================== cover ================================== #
-cover:
-    image: "https://t.alcy.cc/ycy" # image path/url
-    # can also paste direct link from external site
-    # ex. https://i.ibb.co/K0HVPBd/paper-mod-profilemode.png
-    alt: "封面是随机图片" # alt text
-    caption: "随机图片" # display caption under cover
-    relative: false # To use relative path for cover image, used in hugo Page-bundles
-    # hidden: true # only hide on current single page
+featuredImage: "https://t.alcy.cc/ycy"
+featuredImagePreview: "https://t.alcy.cc/ycy"
 
 # **************************************************************************** #
 #                                     其他设置                                     #
@@ -1313,6 +1299,10 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的事件, 时间
 
 ## ShortCode
 
+https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/built-in/
+
+https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/
+
 TO BE CONTINUED...
 
 
@@ -1690,7 +1680,7 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 [The gist shortcode was deprecated in version 0.143.0 and will be removed in a future release. To continue embedding GitHub Gists in your content, you’ll need to create a custom shortcode](https://gohugo.io/shortcodes/gist/)
 
 ---
-# References
+## References
 
 - [hugo.](https://github.com/gohugoio/hugo)
 - [hugo-PaperMod theme.](https://adityatelange.github.io/hugo-PaperMod/)
@@ -1699,7 +1689,7 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 - [MarkDown语法 超详细教程.](https://forum-zh.obsidian.md/t/topic/435)
 - [The configuration block.](https://docs.mathjax.org/en/latest/options/input/tex.html#the-configuration-block)
 
-# TODO
+## TODO
 
 - 完善文章结构, 把测试内容更加完善更加有逻辑的整理完成.
 - 在本文基础上, 整理建站过程.
