@@ -50,7 +50,7 @@ mathjax: false # 禁止 mathjax 渲染 latex 公式
 
 <!-- ================================= 导言 ================================== -->
 
-[**Conventional Commits**](https://www.conventionalcommits.org/) 是一种广泛使用的提交消息规范, 旨在通过标准化的格式提高提交信息的可读性、可维护性, 并支持自动化工具 (如生成 CHANGELOG、语义化版本控制等).
+**Summary:** [Conventional Commits](https://www.conventionalcommits.org/) 是一种广泛使用的提交消息规范, 旨在通过标准化的格式提高提交信息的可读性、可维护性, 并支持自动化工具 (如生成 CHANGELOG、语义化版本控制等).
 
 <!--more-->
 ---

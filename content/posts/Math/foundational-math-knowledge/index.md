@@ -82,7 +82,7 @@ date: 2025-02-21T15:54:59+08:00
 <!-- ============================ begin summary ============================ -->
 <!-- If nothing is written here, only the title and author will appear on the listing page. -->
 
-本文总结了个人觉得应该知道的数学内容.
+**Summary:** 本文总结了个人觉得应该知道的数学内容.
 
 <!-- ============================= end summary ============================= -->
 <!--more-->

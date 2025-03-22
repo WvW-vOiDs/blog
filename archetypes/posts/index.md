@@ -82,7 +82,7 @@ date: {{ .Date }}
 <!-- ============================ begin summary ============================ -->
 <!-- If nothing is written here, only the title and author will appear on the listing page. -->
 
-
+**Summary:** 
 
 <!-- ============================= end summary ============================= -->
 <!--more-->

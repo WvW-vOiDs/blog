@@ -47,7 +47,7 @@ featuredImagePreview: "images/cover.webp" # 用在主页预览的文章特色图
 # mathjax: false # 禁止 mathjax 渲染 latex 公式
 ---
 
-本文用于测试和展示网站功能, 并作为博客功能的说明书.
+**Summary:** 本文用于测试和展示网站功能, 并作为博客功能的说明书.
 
 <!--more-->
 ---
