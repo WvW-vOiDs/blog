@@ -4,13 +4,12 @@
 # **************************************************************************** #
 date: "2024-12-30T12:03:13+08:00"
 title: "Test Demo"
-slug: "test-demo"
+slug: "Test demo"
 
 description: "Description 将会在 single page 展示. 本文用于测试网站功能." # 文章内容的描述
 summary: "Summary 将会在list page展示. 本文用于测试网站功能."
-hideSummary: false # 如果写summary就取消注释
 
-tags: ["markdown", "Hugo", "TODO"] # 关键词
+tags: ["Markdown", "Hugo", "TODO"] # 关键词
 categories: ["Draft"] # 文件夹结构
 collections: ["博客搭建"] # 合集: 用于更新系列文章, 如: "量子力学抄书笔记"
 
@@ -20,6 +19,11 @@ collections: ["博客搭建"] # 合集: 用于更新系列文章, 如: "量子�
 # =================================== model ================================== #
 draft: false
 # weight: 1 # 需要置顶时使用
+
+# ================================ encryption ================================ #
+password: "1234" # [必需] 加密页面内容的密码
+message: "密码是 1234" # [可选] 加密提示信息
+# ---------------------------------------------------------------------------- #
 
 # ================================= component ================================ #
 # ShowToc: false # 默认 true
@@ -32,8 +36,8 @@ draft: false
 # searchHidden: true # 默认 false
 
 # =================================== cover ================================== #
-featuredImage: "https://t.alcy.cc/ycy"
-featuredImagePreview: "https://t.alcy.cc/ycy"
+featuredImage: "https://t.alcy.cc/ycy" # 文章的特色图片 在文章开始展示
+featuredImagePreview: "images/cover.webp" # 用在主页预览的文章特色图片
 
 # **************************************************************************** #
 #                                     其他设置                                     #
@@ -43,6 +47,10 @@ featuredImagePreview: "https://t.alcy.cc/ycy"
 # mathjax: false # 禁止 mathjax 渲染 latex 公式
 ---
 
+本文用于测试和展示网站功能, 并作为博客功能的说明书.
+
+<!--more-->
+---
 ## Markdown 基本语法
 
 FixIt 主题作者已经提供了一个很好的 [markdown 基本语法介绍](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/), 这里仅对个人不太熟悉和常用的进行记录. 本节内容大量来自于主题作者提供的 [文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/).
