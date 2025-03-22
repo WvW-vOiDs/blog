@@ -267,7 +267,7 @@ disableThemeInject = false
     disclaimer = ""
   # Home page posts
   [home.posts]
-    enable = false
+    enable = true
     # special amount of posts in each home posts page
     pagination.pagerSize = 6
 
