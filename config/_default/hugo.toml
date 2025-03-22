@@ -30,8 +30,8 @@ enableEmoji = false
 relativeURLs = false # Do not enable this option unless you are creating a serverless site, navigable via the file system.
 
 buildDrafts = false
-hideSummary = true # WvW-vOiDs: 默认不显示 Summary 除非在导言区写了并设置为 false
 summaryLength = 150 # https://gohugo.io/content-management/summaries/#automatic-summary
+
 # ignore some build errors
 # ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
