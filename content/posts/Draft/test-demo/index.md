@@ -44,7 +44,7 @@ featuredImagePreview: "images/cover.webp" # 用在主页预览的文章特色图
 # **************************************************************************** #
 
 # ================================== mathjax ================================= #
-# mathjax: false # 禁止 mathjax 渲染 latex 公式
+math: true # 使用 mathjax 渲染 latex 公式
 ---
 
 **Summary:** 本文用于测试和展示网站功能, 并作为博客功能的说明书.
@@ -67,7 +67,7 @@ FixIt 主题作者已经提供了一个很好的 [markdown 基本语法介绍](h
 > ## markdown 基本语法 {#custom-id}
 > ## markdown 基本语法 <a id="custom-id"></a>
 > ```
-> 前者会导致默认生成的锚点 (上例中即为 `#markdown-基本语法`) 无法使用, 取而代之为自定义的锚点名称 (上例中即为 `#custon-id`). 后者则是两个锚点名均可使用并且定位到相同位置.
+> 前者会导致默认生成的锚点 (上例中即为 `#markdown-基本语法`) 无法使用, 取而代之为自定义的锚点名称 (上例中即为 `#custon-id`). 后者则是两个锚点名均可使用并且定位到相同位置. 个人推荐使用后者.
 
 #### 正文锚点
 
@@ -364,6 +364,70 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 
 FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但由于个人对宏包有较多需求, 故暂时使用了一个 **破坏性的** 方法强制使用 [MathJax](https://www.mathjax.org/). 具体情况见:
 {{< link href="https://github.com/hugo-fixit/FixIt/issues/574" content="[FEATURE] Add MathJax Support as an Alternative Renderer" title="[FEATURE] Add MathJax Support as an Alternative Renderer" card=true card-icon="fa-brands fa-github fa-fw" >}}
+
+> [!Warning]
+> 目前若加密文章, 公式则无法渲染.
+
+以下是具体测试:
+
+> [!Example]- 行内公式
+> ```LaTeX
+> 这是一个行内公式 \(a^*=x-b^*\).
+> ```
+> 这是一个行内公式 \(a^*=x-b^*\).
+
+> [!Example]- 行间公式
+> ```latex
+> \begin{aligned}
+> \ce{CO2 + C -> 2CO}\\
+> \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+> \end{aligned}
+> ```
+> \[
+    \begin{aligned}
+        &\ce{CO2 + C -> 2CO}\\
+        &\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+    \end{aligned}
+  \]
+
+> [!Example]- physics 宏包
+> ```latex
+> \[\mqty(1 & 2 \\ 3 & 4)\]
+> \[\ip{\psi}{\phi}\]
+> ```
+> \[\mqty(1 & 2 \\ 3 & 4)\]
+> \[\ip{\psi}{\phi}\]
+
+> [!Warning]
+>
+> `<` 后 **一定** 要接一个空格 (或使用 `\lt` 代替 `<` 以强制提醒自己加空格), 否则会当成 html 的标签而无法渲染.[^无法渲染]
+> ```latex
+> \[
+>     x < y, x\lt y
+> \]
+> ```
+> \[
+      x < y, x\lt y
+  \]
+
+[^无法渲染]: https://discourse.gohugo.io/t/math-equations-with-the-less-than-sign-cant-render-correctly/52890
+
+
+> [!Example]- 超过3个大括号的公式
+> 根据 [SonnyCalcr的博客](https://sonnycalcr.github.io/posts/build-a-blog-using-hugo-papermod-github-pages/#%E9%85%8D%E7%BD%AE%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F) 所说:
+>
+> > ...数学公式如果有超过了三对花括号, 那么, 其解析和转义就会出问题...
+>
+> 但在本文中尚未遇到, 可能是此 bug 已被修复?
+>
+> ```LaTeX
+> \[
+>     \boldsymbol{x}_{i+1} + \boldsymbol{x}_{i+2} = \boldsymbol{x}_{i+3}
+> \]
+> ```
+> \[
+      \boldsymbol{x}_{i+1} + \boldsymbol{x}_{i+2} = \boldsymbol{x}_{i+3}
+  \]
 
 ### 字符注音 或 注释
 
@@ -1305,394 +1369,287 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的事件, 时间
 >     type: danger
 > ```
 
-## ShortCode
+## Shortcodes
 
-https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/built-in/
+### Hugo 内置 Shortcodes
 
-https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/
+参考 [FixIt 文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/built-in/).
 
-TO BE CONTINUED...
+#### figure
 
+```markdown
+{{</* figure
+  src="/images/cover.webp"
+  alt="A photograph of Zion National Park"
+  link="https://www.nps.gov/zion/index.htm"
+  caption="Zion National Park"
+  class="ma0 w-75"
+*/>}}
+```
 
----
-{.awesome-hr}
+建议使用 markdown 默认图片语法 或 FixIt 提供的 [image shortcode](#image-shortcode).
 
+{{< figure src="https://t.alcy.cc/ycy" alt="随机图床" link="https://t.alcy.cc/ycy" caption="随机图床" class="ma0 w-75" >}}
 
----
+#### gist
 
-个人隐私 blog 通过 submodule 导入到 repository 中, 并通过 .gitignore 不部署到网站上. submodule 通过[本地加密](https://github.com/AGWA/git-crypt)更新.
+Hugo 将不再内置 Gist shortcode[^gist]:
 
----
+> The gist shortcode was deprecated in version 0.143.0 and will be removed in a future release.
 
-markdown 插入图片:
+[^gist]: Reference: [Gist shortcode](https://gohugo.io/shortcodes/gist/).
 
-![随机图床](https://t.alcy.cc/ycy "随机图床")
+#### Instagram
 
-Hugo short-code 插入图片:
+```markdown
+{{</* instagram CxOWiQNP2MO */>}}
+```
+{{< instagram CxOWiQNP2MO >}}
 
-{{< figure
-    src="https://t.alcy.cc/ycy"
-    alt="随机图床"
-    link="https://t.alcy.cc/ycy"
-    caption="随机图床"
-    class="ma0 w-75"
->}}
+#### QR
 
-html 插入图片:
+```markdown
+{{</* qr text="https://wvw-voids.github.io" level="high"/*/>}}
+```
+{{< qr text="https://wvw-voids.github.io" level="high"/>}}
 
-<img
-    src="https://t.alcy.cc/ycy"
-    alt="随机图床"
-    title="点击刷新"
-    class="ma0 w-75"
-    onclick="src=src+'?'+Math.random() * 5;">
+或者
+```markdown
+{{</* qr level="high" scale=4 alt="QR code example"*/>}}
+Hello, this is vOiDs.
+{{</* /qr */>}}
+```
+{{< qr level="high" scale=4 alt="QR code example">}}
+Hello, this is vOiDs.
+{{< /qr >}}
 
-总体来说越靠后的方法功能越全面, 但是语法也会越复杂.
+#### X
 
----
+```markdown
+{{</* x user="SanDiegoZoo" id="1453110110599868418" */>}}
+```
+> [!Warning]
+> 目前无法渲染.
 
-插入 slides:
+#### Vimeo
 
-- [slidev](https://sli.dev)
+```markdown
+{{</* vimeo 146022717 */>}}
+```
+{{< vimeo 146022717 >}}
 
-<iframe
-    src="https://sli.dev/demo/starter"
-    allow="fullscreen"
-    allowfullscreen
-    style="width: 100%; aspect-ratio: 16/9; border: none;"
-></iframe>
+#### Youtube
 
-参考了 [Thomas Boerger](https://github.com/tboerger/talks), [Anthony Fu](https://github.com/antfu/talks), [Haili Zhang](https://github.com/webup/openfunction-talks) 等人的项目.
+```markdown
+{{</* youtube id=0RKpf3rK57I mute=true */>}} <!-- 最好默认加入 `mute=true`, 保护大家听力, 人人有责! -->
+```
+{{< youtube id=0RKpf3rK57I mute=true >}}
 
-- beamer (通过 slidev 展示)
+### FixIt 扩展 Shortcodes
 
+参考 [FixIt 文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/).
+
+#### link
+
+普通链接用 markdown 语法即可, 这个 shortcode 主要是提供了卡片式链接:
+```markdown
+{{</* link href="https://wvw-voids.github.io/blog" content="WvW-vOiDs 的 blog 主页" title="悬停在链接上时显示的文字" card=true card-icon="https://wvw-voids.github.io/blog/icons/favicon.svg"*/>}}
+```
+{{< link href="https://wvw-voids.github.io/blog" content="WvW-vOiDs 的 blog 主页" title="悬停在链接上时显示的文字" card=true card-icon="https://wvw-voids.github.io/blog/icons/favicon.svg">}}
+
+也可以表示可下载资源:
+```markdown
+{{</* link href="images/cover.webp" content="本文的 cover. 图片来自于https://t.alcy.cc/ycy" card=true download="下载文件名"*/>}}
+```
+{{< link href="images/cover.webp" content="本文的 cover. 图片来自于https://t.alcy.cc/ycy" card=true download="下载文件名" >}}
+
+#### image <a id="image-shortcode"></a>
+
+```markdown
+{{</* image src="/images/cover.webp" alt="本文的 cover" caption="本文的 cover. 图片来自于<https://t.alcy.cc/ycy>" */>}}
+```
+
+{{< image src="/images/cover.webp" alt="本文的 cover" caption="本文的 cover. 图片来自于<https://t.alcy.cc/ycy>" >}}
+
+> [!Note]
+> 也可以用 markdown 格式的图片引用, 大部分情况下足够满足需求. 如果有更多需求不如直接写 html.
+
+#### mapbox
+
+由于没有 accessToken 所以具体内容见 [FixIt 文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/mapbox/).
+
+#### music
+
+详情见 [FixIt 文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/music/).
+
+```markdown
+{{</* music auto="https://music.163.com/#/playlist?id=644299359" */>}}
+```
+
+> [!Warning]
+> 当前使用 music shortcode 后页面目录会卡住, 详情见 {{< link href="https://github.com/hugo-fixit/FixIt/issues/577" content="[BUG] 使用 music shortcode 后会导致目录卡死" title="[BUG] 使用 music shortcode 后会导致目录卡死" card=true card-icon="fa-brands fa-github fa-fw" >}}
+
+#### spotify
+
+详情见 [FixIt 文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/spotify/).
+```markdown
+{{</* spotify type="album" id="6Nws2NAPuxaHzB7MfD1lhg" */>}}
+```
+{{< spotify type="album" id="6Nws2NAPuxaHzB7MfD1lhg" >}}
+
+#### bilibili
+
+```markdown
+{{</* bilibili id="BV1qM411k79Z" t=6317 */>}}
+```
+{{< bilibili id="BV1qM411k79Z" t=6317 >}}
+
+#### douyin
+
+```markdown
+{{</* douyin 7471079764552371494 */>}}
+```
+{{< douyin 7471079764552371494 >}}
+
+#### typeit
+
+```markdown
+{{</* typeit tag=h5 loop=true */>}}
+这一个带有基于 [TypeIt](https://typeitjs.com/) 的 **打字动画** 的 *段落*……
+{{</* /typeit */>}}
+
+{{</* typeit code=java */>}}
+public class HelloWorld {
+    public static void main(String []args) {
+        System.out.println("Hello World");
+    }
+}
+{{</* /typeit */>}}
+
+{{</* typeit group=paragraph */>}}
+**首先**, 这个段落开始
+{{</* /typeit */>}}
+
+{{</* typeit group=paragraph */>}}
+**然后**, 这个段落开始
+{{</* /typeit */>}}
+```
+{{< typeit tag=h5 loop=true >}}
+这一个带有基于 [TypeIt](https://typeitjs.com/) 的 **打字动画** 的 *段落*……
+{{< /typeit >}}
+
+{{< typeit code=java >}}
+public class HelloWorld {
+    public static void main(String []args) {
+        System.out.println("Hello World");
+    }
+}
+{{< /typeit >}}
+
+{{< typeit group=paragraph >}}
+**首先**, 这个段落开始
+{{< /typeit >}}
+
+{{< typeit group=paragraph >}}
+**然后**, 这个段落开始
+{{< /typeit >}}
+
+#### script
+
+```markdown
+{{</* script */>}}
+console.log('Hello FixIt!');
+{{</* /script */>}}
+```
+{{< script >}}
+console.log('Hello FixIt!');
+{{< /script >}}
+
+#### details
+
+```markdown
+{{</* details summary="这里可以写 _markdown_ 语法" open=true */>}}
+展开内容是正常 _markdown_ 格式.
+{{</* /details */>}}
+```
+{{< details summary="这里可以写 _markdown_ 语法" open=true >}}
+展开内容是正常 _markdown_ 格式.
+{{< /details >}}
+
+#### fixit-encrypt
+
+{{% fixit-encryptor password="1212" message="密码是 1212" %}}
+
+加密部分中的公式暂时 **无法正确渲染**: \(\mathrm{e}^{\mathrm{i}\pi}=-1\)
+
+{{% /fixit-encryptor %}}
+
+### 自定义 Shortcodes
+
+> [!TODO]
+> - [ ] 插入 [GeoGebra](https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_Embedding/)
+> - [x] 插入 [Slidev](https://sli.dev)
+
+#### slidev
+
+> [Slidev](https://sli.dev) (slide + dev, /slaɪdɪv/) 是一个为开发者设计的基于 Web 的幻灯片制作工具。它帮助您以 Markdown 的形式专注于编写幻灯片的内容，并制作出具有交互式演示功能的、高度可自定义的幻灯片。
+
+```markdown
+{{</* slidev src="https://sli.dev/demo/starter" aspect_ratio="16/9" */>}} <!-- 默认值 必须要有引号! -->
+```
+
+{{< slidev >}}
+
+> [个人 slidev 仓库](https://github.com/WvW-vOiDs/slides) 的搭建参考了 [Thomas Boerger](https://github.com/tboerger/talks), [Anthony Fu](https://github.com/antfu/talks), [Haili Zhang](https://github.com/webup/openfunction-talks) 等人的项目.
+
+> [!beamer]-
+>
 > 暂时没找到比较好的演示加教程, 先用随便找的一篇占位.
-
-<iframe
-    src="https://wvw-voids.github.io/slides/The-beamer-class-for-LATEX"
-    allow="fullscreen"
-    allowfullscreen
-    style="width: 100%; aspect-ratio: 4/3; border: none;"
-></iframe>
-
----
-
-LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
-
----
+>
+> {{< slidev "https://wvw-voids.github.io/slides/The-beamer-class-for-LATEX" "4/3" >}}
 
 ## 常用 html 代码
-```md
+
+### 缩放
+
+```markdown
+<small>这是一段缩小文本</small> vs. 普通大小 vs. <big>放大文本</big>
+```
 <small>这是一段缩小文本</small> vs. 普通大小 vs. <big>放大文本</big>
 
+### 颜色
+
+```markdown
+<font color=orange>橘色文本</font> vs. <font color=teal>水鸭色文本</font>
+```
 <font color=orange>橘色文本</font> vs. <font color=teal>水鸭色文本</font>
 
+### 空格与换行
+
+```markdown
+文本间的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多个空格, 通过 html代码`&nbsp;` 实现.
+
+文本间的换行<br><br><br><br><br>使用`<br>`实现.
+```
 文本间的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多个空格, 通过 html代码`&nbsp;` 实现.
 
 文本间的换行<br><br><br><br><br>使用`<br>`实现.
 
-```
-> [!Example]-
-> <small>这是一段缩小文本</small> vs. 普通大小 vs. <big>放大文本</big>
->
-> <font color=orange>橘色文本</font> vs. <font color=teal>水鸭色文本</font>
->
-> 文本间的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多个空格, 通过 html代码`&nbsp;` 实现.
->
-> 文本间的换行<br><br><br><br><br>使用`<br>`实现.
+## 其他细节展示
 
+- 中文“引号” vs. 英文"引号"
 
-## 其他细节
+- :smile: vs. 😄
 
-中文“引号” vs. 英文"引号"
-
-:smile: vs. 😄
-
-> [!Note]
-> 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入emoji. 但无论true or false 都不影响直接输入 unicode版 emoji.
-
-<!--
-音频嵌入测试:
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2614222287&auto=0&height=66"></iframe> -->
-
-<!-- 视频嵌入测试:
-
-<iframe width=720 height=400 src="https://player.bilibili.com/player.html?bvid=BV1aTvieqEfw&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
-
-<!-- 网页嵌入测试:
-
-<iframe width=720 height=400 src="https://www.bilibili.com/" scrolling="auto" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
----
-
-
-
-## 数学公式测试
-
-### 行内公式
-*code*:
-```LaTeX
-这是一个行内公式 \(a^*=x-b^*\).
-```
-
-*output*:
-这是一个行内公式 \(a^*=x-b^*\).
-
-
-### 行间公式
-
-这些是行间公式:
-
-1.
-*code*:
-```latex
-\[a^*=x-b^*.\]
-```
-
-*output*:
-
-\[a^*=x-b^*.\]
-
-2.
-*code*:
-```latex
-\[ a^*=x-b^*. \]
-```
-
-*output*:
-
-\[ a^*=x-b^*. \]
-
-3.
-*code*:
-```LaTeX
-\[
-    a^*=x-b^*.
-\]
-```
-
-*output*:
-
-\[
-    a^*=x-b^*.
-\]
-
-4. 化学方程式:
-
-*code*:
-```latex
-\begin{aligned}
-\ce{CO2 + C -> 2CO}\\
-\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
-\end{aligned}
-```
-\[
-\begin{aligned}
-&\ce{CO2 + C -> 2CO}\\
-&\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
-\end{aligned}
-\]
-
-### physics 宏包
-
-现在用的 Mathjax 的cdn不是很稳定, 有时候本地渲染不出来.
-
-1.
-*code*:
-```latex
-\[
-    \mqty(1 & 2 \\ 3 & 4)
-\]
-```
-
-*output*:
-
-\[
-    \mqty(1 & 2 \\ 3 & 4)
-\]
-
-2.
-*code*:
-```latex
-\[
-    \ip{\psi}{\phi}
-\]
-```
-
-*output*:
-
-\[
-    \ip{\psi}{\phi}
-\]
-
-3. 带有 `<` 的公式.
-
-> [!Warning]
->
-> `<` 后 **一定** 要接一个空格 (或使用 `\lt` 代替 `<` 以强制提醒自己加空格), 否则会当成 html 的标签而无法渲染.[^无法渲染]
-
-[^无法渲染]: https://discourse.gohugo.io/t/math-equations-with-the-less-than-sign-cant-render-correctly/52890
-
-*code*:
-```latex
-\[
-    x < y, x\lt y
-\]
-```
-
-*output*:
-
-\[
-    x < y, x\lt y
-\]
-
-
-### 超过3个大括号的公式
-
-根据 [SonnyCalcr的博客](https://sonnycalcr.github.io/posts/build-a-blog-using-hugo-papermod-github-pages/#%E9%85%8D%E7%BD%AE%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F) 所说:
-
-> ...数学公式如果有超过了三对花括号, 那么, 其解析和转义就会出问题...
-
-但在本文中尚未遇到, 可能是此 bug 已被修复?
-
-*code*:
-```LaTeX
-\[
-    \boldsymbol{x}_{i+1} + \boldsymbol{x}_{i+2} = \boldsymbol{x}_{i+3}
-\]
-```
-
-*output*:
-
-\[
-    \boldsymbol{x}_{i+1} + \boldsymbol{x}_{i+2} = \boldsymbol{x}_{i+3}
-\]
-
-## 代码测试
-
-### 行内代码
-
-*code*:
-```md
-`This is Inline Code.`
-```
-
-*output*:
-`This is Inline Code.`
-
-
-
-
-### 行间代码
-
-1. 普通\`\`\`代码块.
-
-```
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Example HTML5 Document</title>
-        <meta
-            name="description"
-            content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-        />
-    </head>
-    <body>
-        <p>Test</p>
-    </body>
-</html>
-```
-
-2. \`\`\`代码块加语言类型声明.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Example HTML5 Document</title>
-        <meta
-            name="description"
-            content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-        />
-    </head>
-    <body>
-        <p>Test</p>
-    </body>
-</html>
-```
-
-3. \`\`\`代码块加语言类型声明, 并且增加行号. [^行号]
-
-[^行号]: 和上一个一样是因为我默认设置了代码块有行号.
-
-```html {linenos=true}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Example HTML5 Document</title>
-        <meta
-            name="description"
-            content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-        />
-    </head>
-    <body>
-        <p>Test</p>
-    </body>
-</html>
-```
-
-4. \`\`\`代码块加语言类型声明, 有行号, 并且有 <mark>高亮</mark> 代码.
-
-```html {linenos=true,hl_lines=["2-4",8,11]}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Example HTML5 Document</title>
-        <meta
-            name="description"
-            content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-        />
-    </head>
-    <body>
-        <p>Test</p>
-    </body>
-</html>
-```
-
-5. 还可以设置初始行号, 和代码行号 url 的前缀. (如果需要可以把前缀设置成这段 code 的文件名等)
-
-```html {linenos=true,hl_lines=["2-4",8,11],linenostart=199,lineanchors=prefixOfCode}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Example HTML5 Document</title>
-        <meta
-            name="description"
-            content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-        />
-    </head>
-    <body>
-        <p>Test</p>
-    </body>
-</html>
-```
-
-
-### Github Gist
-
-[The gist shortcode was deprecated in version 0.143.0 and will be removed in a future release. To continue embedding GitHub Gists in your content, you’ll need to create a custom shortcode](https://gohugo.io/shortcodes/gist/)
+  > [!Note]
+  > 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入emoji. 但无论true or false 都不影响直接输入 unicode版 emoji.
 
 ---
 ## References
 
-- [hugo.](https://github.com/gohugoio/hugo)
-- [hugo-PaperMod theme.](https://adityatelange.github.io/hugo-PaperMod/)
-- [hugo-FixIt theme.](https://fixit.lruihao.cn/)
+- [Hugo.](https://github.com/gohugoio/hugo)
+- [Hugo-PaperMod theme.](https://adityatelange.github.io/hugo-PaperMod/)
+- [Hugo-FixIt theme.](https://fixit.lruihao.cn/)
 - [随机图床.](https://t.alcy.cc/ycy)
 - [MarkDown语法 超详细教程.](https://forum-zh.obsidian.md/t/topic/435)
 - [The configuration block.](https://docs.mathjax.org/en/latest/options/input/tex.html#the-configuration-block)
@@ -1701,6 +1658,5 @@ LaTeX 支持: \(\mathrm{e}^{\mathrm{i}x} = \cos x+ \mathrm{i}\sin x\)
 
 - 完善文章结构, 把测试内容更加完善更加有逻辑的整理完成.
 - 在本文基础上, 整理建站过程.
-    - 修改字体引用文章: [1](https://github.com/adityatelange/hugo-PaperMod/discussions/506#discussioncomment-1205452), [2](https://huuuuuuo.github.io/post/hugo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93/), [3](https://huuuuuuo.github.io/post/hugo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93/), [4](https://discourse.gohugo.io/t/what-is-the-preferred-way-to-change-the-default-font-in-the-hugo-book-theme/36130/2)
-    - slug: [1](https://gohugo.io/content-management/urls/#slug)
-- 插入 [GeoGebra](https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_Embedding/).
+  - 修改字体引用文章: [1](https://github.com/adityatelange/hugo-PaperMod/discussions/506#discussioncomment-1205452), [2](https://huuuuuuo.github.io/post/hugo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93/), [3](https://discourse.gohugo.io/t/what-is-the-preferred-way-to-change-the-default-font-in-the-hugo-book-theme/36130/2)
+  - 个人隐私 blog 通过 submodule 导入到 repository 中, 并通过 .gitignore 不部署到网站上. submodule 通过[本地加密](https://github.com/AGWA/git-crypt)更新.
