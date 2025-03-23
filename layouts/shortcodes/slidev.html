@@ -1,0 +1,10 @@
+{{- $src := cond .IsNamedParams (.Get "src") (.Get 0) | default "https://sli.dev/demo/starter" -}}
+{{- $aspect_ratio := cond .IsNamedParams (.Get "aspect_ratio") (.Get 1) | default "16/9" -}}
+
+<iframe
+    src="{{ $src }}"
+    allowfullscreen=true
+    {{ safeHTMLAttr (printf `style="width: 100%%; aspect-ratio: %s; border: none;"` $aspect_ratio) }}
+></iframe>
+
+{{- /* EOF */ -}}
