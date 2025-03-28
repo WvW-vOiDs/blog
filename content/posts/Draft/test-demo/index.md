@@ -410,7 +410,7 @@ FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但
       x < y, x\lt y
   \]
 
-[^无法渲染]: https://discourse.gohugo.io/t/math-equations-with-the-less-than-sign-cant-render-correctly/52890
+[^无法渲染]: Reference: [Math equations with the less than sign (<) can’t render correctly](https://discourse.gohugo.io/t/math-equations-with-the-less-than-sign-cant-render-correctly/52890)
 
 
 > [!Example]- 超过3个大括号的公式
@@ -1584,6 +1584,16 @@ console.log('Hello FixIt!');
 
 {{% /fixit-encryptor %}}
 
+#### raw
+
+如果需要在引用块中使用公式, 最好用 `{?{}{< raw >}}` 和 `{?{}{< /raw >}}` 包裹.
+
+> [!Example]- 使用 raw 才能正常显示
+> {{< raw >}}
+\[
+  E=mc^2
+\]{{< /raw >}}
+
 ### 自定义 Shortcodes
 
 > [!TODO]
@@ -1651,12 +1661,11 @@ console.log('Hello FixIt!');
 - [Hugo-PaperMod theme.](https://adityatelange.github.io/hugo-PaperMod/)
 - [Hugo-FixIt theme.](https://fixit.lruihao.cn/)
 - [随机图床.](https://t.alcy.cc/ycy)
-- [MarkDown语法 超详细教程.](https://forum-zh.obsidian.md/t/topic/435)
 - [The configuration block.](https://docs.mathjax.org/en/latest/options/input/tex.html#the-configuration-block)
 
 ## TODO
 
-- 完善文章结构, 把测试内容更加完善更加有逻辑的整理完成.
-- 在本文基础上, 整理建站过程.
+- [x]完善文章结构, 把测试内容更加完善更加有逻辑的整理完成.
+- [ ]在本文基础上, 整理建站过程.
   - 修改字体引用文章: [1](https://github.com/adityatelange/hugo-PaperMod/discussions/506#discussioncomment-1205452), [2](https://huuuuuuo.github.io/post/hugo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93/), [3](https://discourse.gohugo.io/t/what-is-the-preferred-way-to-change-the-default-font-in-the-hugo-book-theme/36130/2)
   - 个人隐私 blog 通过 submodule 导入到 repository 中, 并通过 .gitignore 不部署到网站上. submodule 通过[本地加密](https://github.com/AGWA/git-crypt)更新.
