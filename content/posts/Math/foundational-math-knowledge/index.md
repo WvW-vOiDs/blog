@@ -148,18 +148,6 @@ date: 2025-02-21T15:54:59+08:00
 \right.
 \]
 
-> [!note]- 性质
-> {{< raw >}}
-1. 导数
-\[
-    \mathcal{F}\qty[\partial_\mu f] = ik_\mu \mathcal{F}[f]
-\]
-2. 积分
-\[
-    \mathcal{F}[\int f] = ik_\mu \mathcal{F}[f]
-\]
-{{< /raw >}}
-
 ### 实, 倒空间取值一个离散一个连续: Fourier 级数
 
 \[\left\{\begin{aligned}
@@ -177,8 +165,8 @@ date: 2025-02-21T15:54:59+08:00
 
 \[
 \begin{aligned}
-    & f(x \equiv R_l) = \sum_{h \in Z } F(G_h) \exp( 2\pi i \sum_{j} h_j l_j/N_j),\\
-    & F(k \equiv K_h) = \frac{1}{N_1 \cdots N_d} \sum_{l \in Z } f(R_l) \exp(-2\pi i \sum_{j} h_j l_j/N_j).
+    & f(x \equiv R_l) = \sum_{h \in Z } F(G_h) \exp( 2\pi i \sum_{j=1}^{d} h_j l_j/N_j),\\
+    & F(k \equiv K_h) = \frac{1}{N_1 \cdots N_d} \sum_{l \in Z } f(R_l) \exp(-2\pi i \sum_{j=1}^{d} h_j l_j/N_j).
 \end{aligned}
 \]
 
@@ -208,7 +196,7 @@ date: 2025-02-21T15:54:59+08:00
         \delta\qty(\phi(x)) = \sum_{k} \frac{\delta(x-x_k)}{\abs{\phi^\prime(x_k)}}
     \]
 
-- \( \ln(x) = \ln \abs{x} + i \pi H(-x) \qc{\forall x \in \mathbb{R}/{0}} \).
+- \( \ln(x) = \ln \abs{x} + i \pi H(-x) \qc{\forall x \in \mathbb{R}/\qty{0}} \).
 
 
 ## 其他
@@ -216,7 +204,7 @@ date: 2025-02-21T15:54:59+08:00
 ### 多元函数 Taylor 展开
 
 \[
-    f^\mu(x)=\exp(x^\nu \partial_\nu|_0) \; f^\mu(x)
+    f^\mu(x)=\exp(x^\nu \partial_\nu|_0) \; f^\mu.
 \]
 
 
