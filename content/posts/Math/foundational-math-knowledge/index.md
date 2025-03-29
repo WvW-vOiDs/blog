@@ -172,10 +172,16 @@ date: 2025-02-21T15:54:59+08:00
 
 ### Some Examples
 
-#### Delta 函数
+#### Dirac Delta 函数
 
 \[
     \delta(x) = \int \frac{\dd[d]{k}}{(2\pi)^d} \; 1 \; e^{i k \cdot x}
+\]
+
+#### Heaviside Step 函数
+
+\[
+    H(x) = \int \frac{\dd{k}}{2\pi} \; \qty\Big( \pi \delta(k) + \PV{\frac{1}{ik}} ) \; e^{i k x}
 \]
 
 #### Dirac 梳
@@ -195,8 +201,34 @@ date: 2025-02-21T15:54:59+08:00
     \[
         \delta\qty(\phi(x)) = \sum_{k} \frac{\delta(x-x_k)}{\abs{\phi^\prime(x_k)}}
     \]
+- \( \nabla^2(1/r) = -4\pi \delta(r) \).
 
-- \( \ln(x) = \ln \abs{x} + i \pi H(-x) \qc{\forall x \in \mathbb{R}/\qty{0}} \).
+- \( \ln x= \ln \abs{x} + i \pi H(-x) \implies (\ln x)^\prime = 1/x - i\pi \delta(x) \qc{\forall x \in \mathbb{R}/\qty{0}}.  \)
+    \( \abs{x} = x \qty(H(x) - H(-x)) \implies (\abs{x})^\prime = H(x) - H(-x).\)
+
+## 矩阵
+
+### 分解
+
+#### 奇异值分解
+
+[奇异值分解]^(Singular Value Decomposition). TODO...
+
+#### 极分解
+
+[极分解]^(Polar Decomposition). TODO...
+
+### Pauli 矩阵
+
+1.
+\[
+    (\va{a} \cdot \va{\sigma})(\va{b} \cdot \va{\sigma}) = \va{a}\cdot\va{b}\; 1_2 + \va{a}\times\va{b}\cdot\va{\sigma}.
+\]
+
+2. For \( A^2 = 1 \),
+\[
+    \exp(i\theta A) = \cos \theta \; 1 + i \sin \theta A.
+\]
 
 
 ## 其他
