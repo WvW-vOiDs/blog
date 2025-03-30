@@ -79,7 +79,10 @@ draft: false
 date: 2025-02-21T15:54:59+08:00
 # ---------------------------------------------------------------------------- #
 ---
-<!-- ============================ begin summary ============================ -->
+<!-- *********************************************************************** -->
+<!--                              begin summary                              -->
+<!-- *********************************************************************** -->
+
 <!-- If nothing is written here, only the title and author will appear on the listing page. -->
 
 **Summary:** 本文总结了个人觉得应该知道的数学内容.
@@ -87,7 +90,9 @@ date: 2025-02-21T15:54:59+08:00
 <!-- ============================= end summary ============================= -->
 <!--more-->
 ---
-<!-- =========================== begin document ============================ -->
+<!-- *********************************************************************** -->
+<!--                             begin document                              -->
+<!-- *********************************************************************** -->
 ## Fourier 变换
 
 ### 基本知识和记号
@@ -128,7 +133,6 @@ date: 2025-02-21T15:54:59+08:00
         F(\nu) = \int \dd{t} f(t) e^{-i 2\pi \nu t},\quad f(t)=\int \dd{\omega} F(\omega)  e^{i \omega t}.
     \]
 
-[^一般形式]: Ref: [Mathematica](<https://reference.wolfram.com/language/ref/FourierTransform.html>)
 
 ### 实, 倒空间取值都连续: Fourier 变换
 
@@ -208,6 +212,29 @@ date: 2025-02-21T15:54:59+08:00
 
 ## 矩阵
 
+### 行列式 与 迹
+
+
+
+\[
+    \det \exp A = \exp \tr A \; \Leftrightarrow \; \ln \det A = \tr \ln A.
+\]
+
+> [!Note]- Explicit form
+> {{< raw >}}
+\[\begin{aligned}
+    & \det A = \exp \tr \ln A,\\
+    & \tr A = \ln \det \exp A.
+\end{aligned}\]
+{{< /raw >}}
+
+> [!Note]- 行列式的导数
+> {{< raw >}}
+\[
+    \pdv{\det A}{t} = \det(A) \tr(A^{-1}\pdv{A}{t}).
+\]
+{{< /raw >}}
+
 ### 分解
 
 #### 奇异值分解
@@ -216,7 +243,14 @@ date: 2025-02-21T15:54:59+08:00
 
 #### 极分解
 
-[极分解]^(Polar Decomposition). TODO...
+[极分解]^(Polar Decomposition) , 旨在将矩阵像复数那样分解成 **模** 和 **相因子** 之积的形式: \( z = r \exp(i\theta) \).
+
+\(\forall \) [可逆的]^(invertible) \( A \in \mathbb{C}^{n\times n}, \exists !\) [幺正的]^(unitary) \( \exp(i\Theta )\) and [厄米的]^(Hermitian)  [半正定的]^(positive semi-definite) \( R \in \mathbb{C}^{n\times n} \) s.t.
+
+\[
+    A = R \exp(i\Theta).
+\]
+其中, \( R = \sqrt{A^\dagger A} \), \( \exp(i\Theta) = R^{-1}A \).
 
 ### Pauli 矩阵
 
@@ -239,15 +273,40 @@ date: 2025-02-21T15:54:59+08:00
     f^\mu(x)=\exp(x^\nu \partial_\nu|_0) \; f^\mu.
 \]
 
+### Gauss 积分
+
+对于正定的\( A \in \mathbb{R}^{d\times d} \), 有
+
+\[
+    \int_{\mathbb{R}^d} \dd[d]{x} \exp(-\frac{1}{2} x^T A x + B^T x + C) = \qty(\frac{(2\pi)^d}{\det A})^{1/2} \exp(\frac{1}{2} B^T A^{-1} B + C).
+\]
+
+其中, 由于只有 \( A \) 的对称部分才会对积分结果有影响, 故不妨令 \( A_{\mu\nu} \rightarrow A_{(\mu\nu)} \equiv [(A+A^T)/2]_{\mu\nu} \).
+> [!note]- 补充
+> {{< raw >}}
+\[
+    \partial_{B_{\mu}} \text{l.h.s.} = \int_{\mathbb{R}^d} \dd[d]{x} x_\mu \exp(-\frac{1}{2} x^T A x + B^T x + C)
+\]
+{{< /raw >}}
+
 
 <!-- ============================ end document ============================= -->
 
-<!-- =========================== begin appendix ============================ -->
 ---
+<!-- *********************************************************************** -->
+<!--                             begin appendix                              -->
+<!-- *********************************************************************** -->
 ## References
 
-Some references.
+- \( \det(\exp(A)) = \exp(\tr(A)) \) 的证明可以参考 [苏剑林's Blog](https://spaces.ac.cn/archives/6377).
 
 ## TODO
 
 - [这里](#实-倒空间取值都离散-discrete-fourier-transform-dft) DFT 有没有更好的写法?
+
+<!-- ============================ end appendix ============================= -->
+
+<!-- *********************************************************************** -->
+<!--                             begin footnotes                             -->
+<!-- *********************************************************************** -->
+[^一般形式]: Ref: [Mathematica](<https://reference.wolfram.com/language/ref/FourierTransform.html>).
