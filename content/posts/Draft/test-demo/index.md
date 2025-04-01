@@ -1602,7 +1602,7 @@ console.log('Hello FixIt!');
 
 #### slidev
 
-> [Slidev](https://sli.dev) (slide + dev, /slaɪdɪv/) 是一个为开发者设计的基于 Web 的幻灯片制作工具。它帮助您以 Markdown 的形式专注于编写幻灯片的内容，并制作出具有交互式演示功能的、高度可自定义的幻灯片。
+> [Slidev](https://sli.dev) (slide + dev, /slaɪdɪv/) 是一个为开发者设计的基于 Web 的幻灯片制作工具。它帮助您以 Markdown 的形式专注于编写幻灯片的内容，并制作出具有交互式演示功能的、高度可自定义的幻灯片。 --- Slidev
 
 ```markdown
 {{</* slidev src="https://sli.dev/demo/starter" aspect_ratio="16/9" */>}} <!-- 默认值 必须要有引号! -->
