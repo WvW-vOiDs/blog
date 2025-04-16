@@ -130,7 +130,9 @@ date: 2025-02-21T15:54:59+08:00
     \end{aligned}\]
     - Engineering (**maybe** \( a=0 , b=-2\pi \)):
     \[
-        F(\nu) = \int \dd{t} f(t) e^{-i 2\pi \nu t},\quad f(t)=\int \dd{\omega} F(\omega)  e^{i \omega t}.
+        F(\nu) = \int \dd{t} f(t) e^{-i 2\pi \nu t},
+        \quad
+        f(t) = \int \dd{\nu} F(\nu)  e^{i 2\pi \nu t}.
     \]
 
 
@@ -284,7 +286,7 @@ date: 2025-02-21T15:54:59+08:00
     \end{aligned}
     \]
     {{< /raw >}}
-    
+
     > [!note]- 推论
     > {{< raw >}}
     \[
