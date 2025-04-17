@@ -130,7 +130,9 @@ date: 2025-02-21T15:54:59+08:00
     \end{aligned}\]
     - Engineering (**maybe** \( a=0 , b=-2\pi \)):
     \[
-        F(\nu) = \int \dd{t} f(t) e^{-i 2\pi \nu t},\quad f(t)=\int \dd{\omega} F(\omega)  e^{i \omega t}.
+        F(\nu) = \int \dd{t} f(t) e^{-i 2\pi \nu t},
+        \quad
+        f(t) = \int \dd{\nu} F(\nu)  e^{i 2\pi \nu t}.
     \]
 
 
@@ -254,14 +256,58 @@ date: 2025-02-21T15:54:59+08:00
 
 ### Pauli 矩阵
 
-1.
+#### 基础
+
+- 定义
+
+    {{< raw >}}
+    \[
+        \sigma_1 = \mqty(& 1\\1 &),
+        \sigma_2 = \mqty(& -i\\i &),
+        \sigma_3 = \mqty(1 &\\ & -1).
+    \]
+    {{< /raw >}}
+
+- [厄米性]^(Hermiticity)
+
+    {{< raw >}}
+    \[
+        \sigma_i = \sigma_i^\dagger.
+    \]
+    {{< /raw >}}
+
+- 对易/反对易关系
+
+    {{< raw >}}
+    \[
+    \begin{aligned}
+        &\comm{\sigma_i}{\sigma_j} = 2i\, \epsilon^k{}_{ij}\, \sigma_k,\\
+        &\acomm{\sigma_i}{\sigma_j} = 2\, \delta_{ij}\, 1_2.
+    \end{aligned}
+    \]
+    {{< /raw >}}
+
+    > [!note]- 推论
+    > {{< raw >}}
+    \[
+        \sigma_i \sigma_j = \delta_{ij} 1_2 + i \epsilon^k{}_{ij}\,\sigma_k
+    \]
+    {{< /raw >}}
+    >
+    > {{< raw >}}
+    \[
+        \sigma_i = \sigma_i^\dagger = \sigma_i^{-1}
+    \]
+    {{< /raw >}}
+
+#### 推论
+
 \[
     (\va{a} \cdot \va{\sigma})(\va{b} \cdot \va{\sigma}) = \va{a}\cdot\va{b}\; 1_2 + \va{a}\times\va{b}\cdot\va{\sigma}.
 \]
 
-2. For \( A^2 = 1 \),
 \[
-    \exp(i\theta A) = \cos \theta \; 1 + i \sin \theta A.
+    \exp(i\theta A) = \cos \theta \; 1 + i \sin \theta A \qc{\forall A \in \mathbb{C}^{m\times m}, A^2 = 1}.
 \]
 
 
