@@ -4,7 +4,7 @@
 # -------------------------------------------------------------------------------------
 
 # website title
-title = "VoidStalker's Blog"
+title = "某有机体的二进制呓语"
 # Hostname (and path) to the root
 baseURL = "http://wvw-voids.github.io/blog/"
 # theme list
