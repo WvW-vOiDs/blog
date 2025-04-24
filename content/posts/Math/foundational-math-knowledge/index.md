@@ -307,7 +307,7 @@ date: 2025-02-21T15:54:59+08:00
 \]
 
 \[
-    \exp(i\theta A) = \cos \theta \; 1 + i \sin \theta A \qc{\forall A \in \mathbb{C}^{m\times m}, A^2 = 1}.
+    \exp(i\theta A) = \cos \theta \; 1_m + i \sin \theta A \qc{\forall A \in \mathbb{C}^{m\times m}, A^2 = 1_m}.
 \]
 
 
