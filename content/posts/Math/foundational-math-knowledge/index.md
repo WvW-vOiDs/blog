@@ -232,9 +232,10 @@ date: 2025-02-21T15:54:59+08:00
 
 > [!Note]- 行列式的导数
 > {{< raw >}}
-\[
-    \pdv{\det A}{t} = \det(A) \tr(A^{-1}\pdv{A}{t}).
-\]
+\[\left\{\begin{aligned}
+    & \pdv{t} \det A = \det(A) \tr(A^{-1}\pdv{A}{t}),\\
+    & \pdv{t} \ln A = A^{-1} \pdv{A}{t}.
+\end{aligned}\right.\]
 {{< /raw >}}
 
 ### 分解
