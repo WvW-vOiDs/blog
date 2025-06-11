@@ -1,3 +1,4 @@
+// TODO use ESLint to check the code style
 import Util from './util';
 
 class FixIt {
@@ -124,6 +125,21 @@ class FixIt {
     const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
     const $searchLoading = document.getElementById(`search-loading-${suffix}`);
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
+    const $searchCancel = document.getElementById('search-cancel-mobile');
+
+    // goto the PostChat panel rather than search results
+    if (searchConfig.type === 'post-chat' && window.postChatUser) {
+      if (isMobile) {
+        $searchInput.addEventListener('focus', () => {
+          window.postChatUser.setSearchInput('');
+        }, false);
+      } else {
+        $searchToggle.addEventListener('click', () => {
+          window.postChatUser.setSearchInput('');
+        }, false);
+      }
+      return;
+    }
 
     if (isMobile) {
       this._searchMobileOnce = true;
@@ -132,7 +148,7 @@ class FixIt {
         document.body.classList.add('blur');
         $header.classList.add('open');
       }, false);
-      document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+      $searchCancel.addEventListener('click', () => {
         this.disableScrollEvent = false;
         $header.classList.remove('open');
         document.body.classList.remove('blur');
@@ -301,6 +317,8 @@ class FixIt {
                   context: cseConfig.gotoResultsPage
                 }]);
               }
+            } else {
+              finish([]);
             }
           },
           templates: {
@@ -667,12 +685,53 @@ class FixIt {
       this._echartsArr = [];
       const stagingDOM = this.util.getStagingDOM()
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
-        if ($echarts.nextElementSibling.tagName === 'TEMPLATE') {
-          const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
-          stagingDOM.stage($echarts.nextElementSibling.content.cloneNode(true));
-          chart.setOption(stagingDOM.contentAsJson());
-          this._echartsArr.push(chart);
+        const $dataEl = $echarts.nextElementSibling;
+        if ($dataEl.tagName !== 'TEMPLATE') {
+          return;
         }
+        const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
+        chart.showLoading();
+        stagingDOM.stage($dataEl.content.cloneNode(true));
+        const _setOption = (option) => {
+          if (!option) {
+            chart.hideLoading();
+            console.warn('ECharts option is missing or invalid. Chart disposed.', {
+              element: $echarts,
+              option: $dataEl,
+            });
+            chart.dispose();
+            $echarts.removeAttribute('style');
+            return;
+          }
+          chart.hideLoading();
+          chart.setOption(option);
+          this._echartsArr.push(chart);
+        };
+        // support JS object literal or JS code
+        if ($dataEl.dataset.fmt === 'js') {
+          try {
+            const jsCodes = stagingDOM.contentAsText();
+            /**
+             * Get ECharts option
+             * @param {Object} fixit FixIt instance
+             * @param {Object} chart ECharts instance
+             * @returns {Object|Promise} ECharts option or Promise
+             */
+            const _getOption = new Function('fixit', 'chart',
+              this.util.isObjectLiteral(jsCodes) ? `return ${jsCodes}` : jsCodes
+            );
+            if ($dataEl.dataset.async === 'true') {
+              return Promise.resolve(_getOption(this, chart)).then(option => {
+                _setOption(option);
+              });
+            }
+            return _setOption(_getOption(this, chart));
+          } catch (err) {
+            return console.error(err);
+          }
+        }
+        // support JSON
+        _setOption(stagingDOM.contentAsJson());
       });
       stagingDOM.destroy();
     });
@@ -939,13 +998,17 @@ class FixIt {
         document.querySelector('.giscus-frame')?.contentWindow.postMessage({ giscus: message }, giscusConfig.origin);
       });
       this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
-      this.giscus2parentMsg = window.addEventListener('message', (event) => {
+      // gicuss to parent message
+      this._messageListener = (event) => {
+        if (event.origin !== giscusConfig.origin) return;
         const $script = document.querySelector('#giscus>script');
         if ($script){
-          this._giscusOnSwitchTheme();
           $script.parentElement.removeChild($script);
         }
-      }, { once: true });
+        this._giscusOnSwitchTheme()
+        window.removeEventListener('message', this._messageListener, false);
+      };
+      window.addEventListener('message', this._messageListener, false);
       return;
     }
   }
@@ -1051,10 +1114,10 @@ class FixIt {
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
+        this.fixTocScroll();
         this.initToc();
         this.initTocListener();
         this.initPangu();
-        this.fixTocScroll();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1129,6 +1192,21 @@ class FixIt {
       }, false)
     });
     this.scrollEventSet.add(_closeRewardExclude);
+  }
+
+  initPostChatUser() {
+    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') {
+      return;
+    }
+    postChat_theme = this.isDark ? 'dark' : 'light';
+    this.switchThemeEventSet.add((isDark) => {
+      const targetFrame = document.getElementById("postChat_iframeContainer")
+      if (targetFrame) {
+        window.postChatUser.setPostChatTheme(isDark ? 'dark' : 'light');
+      } else {
+        postChat_theme  = isDark ? 'dark' : 'light';
+      }
+    });
   }
 
   onScroll() {
@@ -1270,13 +1348,14 @@ class FixIt {
       this.initWatermark();
       this.initAutoMark();
       this.initReward();
+      this.initPostChatUser();
 
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
+          this.fixTocScroll();
           this.initToc();
           this.initTocListener();
-          this.fixTocScroll();
         }
         this.onScroll();
         this.onResize();
