@@ -118,7 +118,7 @@ date: 2025-06-12T02:29:30+08:00
 
     > [!Note]- 个人键位使用习惯
     > 在使用了 Alice 配列后发现之前基本没使用过的 `Fn` 键现在在一个更顺手的位置, 可以把离键盘中心区太远的不太顺手的按键设置到 fn 层, 尤其是右手部分. 左手部分等到有需要再配置, 现在还是默认配置.
-    > {{< figure src="images/keyborad-win-fn.png" alt="键盘 fn 层" caption="键盘 fn 层" class="ma0 w-75" >}}
+    > {{< figure src="images/keyboard-win-fn.png" alt="键盘 fn 层" caption="键盘 fn 层" class="ma0 w-75" >}}
 
 - **鼠标:** Logitech Lift
     > [!Comment]+
