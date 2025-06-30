@@ -43,8 +43,8 @@
   [goldmark.extensions.passthrough]
     enable = true
     [goldmark.extensions.passthrough.delimiters]
-      block = [['\[', '\]']]
-      inline = [['\(', '\)']]
+      block = [['\[', '\]'], ['$$', '$$']]
+      inline = [['\(', '\)'], ['$', '$']]
   [goldmark.parser]
     autoHeadingID = true # https://gohugo.io/configuration/markup/#parserautoheadingid
     autoHeadingIDType = "github"
