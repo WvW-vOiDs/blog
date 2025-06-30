@@ -362,8 +362,11 @@ FixIt 在 markdown 基本的待办事项表示方法上增加了许多新的状�
 
 ### 数学公式
 
-FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但由于个人对宏包有较多需求, 故暂时使用了一个 **破坏性的** 方法强制使用 [MathJax](https://www.mathjax.org/). 具体情况见:
+~~FixIt 原本使用 [KaTeX](https://katex.org/) 对 LaTeX 语法提供支持. 但由于个人对宏包有较多需求, 故暂时使用了一个 **破坏性的** 方法强制使用 [MathJax](https://www.mathjax.org/). 具体情况见:~~
 {{< link href="https://github.com/hugo-fixit/FixIt/issues/574" content="[FEATURE] Add MathJax Support as an Alternative Renderer" title="[FEATURE] Add MathJax Support as an Alternative Renderer" card=true card-icon="fa-brands fa-github fa-fw" >}}
+
+> [!important]
+> 在 20250630, FixIt 增加了对 MathJax 的支持. 详情见[官方文档](https://fixit.lruihao.cn/zh-cn/documentation/content-management/mathjax-support).
 
 > [!Warning]
 > 目前若加密文章, 公式则无法渲染.
