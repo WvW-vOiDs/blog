@@ -43,9 +43,9 @@ summaryLength = 150 # https://gohugo.io/content-management/summaries/#automatic-
 # See: https://gohugo.io/configuration/media-types/
 # -------------------------------------------------------------------------------------
 
-[mediaTypes]
-  [mediaTypes."application/feed+json"]
-    suffixes = ["json"]
+# [mediaTypes]
+#   [mediaTypes."application/feed+json"]
+#     suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
 # Output Format Definitions
