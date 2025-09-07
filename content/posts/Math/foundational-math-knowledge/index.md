@@ -304,13 +304,19 @@ date: 2025-02-21T15:54:59+08:00
 #### 推论
 
 \[
-    (\va{a} \cdot \va{\sigma})(\va{b} \cdot \va{\sigma}) = \va{a}\cdot\va{b}\; 1_2 + \va{a}\times\va{b}\cdot\va{\sigma}.
+    (\va{a} \cdot \va{\sigma})(\va{b} \cdot \va{\sigma}) = \va{a}\cdot\va{b}\; 1_2 + i\, \va{a}\times\va{b}\cdot\va{\sigma}.
+\]
+\[
+    \implies (\vu{n} \cdot \va{\sigma})^2 = 1_2 \qfor{\forall \vu{n} \in \mathbb{R}^{3}, \abs{\vu{n}} = 1}.
 \]
 
 \[
     \exp(i\theta A) = \cos \theta \; 1_m + i \sin \theta A \qc{\forall A \in \mathbb{C}^{m\times m}, A^2 = 1_m}.
 \]
 
+\[
+    \implies \exp(i (\vu{n} \cdot \va{\sigma}) \theta ) = \cos \theta \; 1_2 + i \qty(\vu{n} \cdot \va{\sigma}) \sin \theta \qfor{\forall \vu{n} \in \mathbb{R}^{3}, \abs{\vu{n}} = 1}.
+\]
 
 ## 其他
 
