@@ -793,7 +793,7 @@ disableThemeInject = false
     [page.math.mathjax]
       cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       [page.math.mathjax.packages]
-        '[+]' = ['physics']
+        '[+]' = ['physics','ams']
       # custom macros map
       # syntax: <macro> = <definition>
       [page.math.mathjax.tex]
@@ -803,13 +803,14 @@ disableThemeInject = false
       # [page.math.mathjax.macros]
         # "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
       [page.math.mathjax.loader]
-        load = ['ui/safe', '[tex]/physics']
+        load = ['ui/safe', '[tex]/physics','[tex]/ams']
         # [page.math.mathjax.loader.paths]
           # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
         # more loader config e.g source, dependencies, provides etc.
       [page.math.mathjax.options]
         enableMenu = true # 允许使用 MathJax 右键菜单
-        skipHtmlTags = ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'annotation', 'annotation-xml']
+        [page.math.mathjax.options.skipHtmlTags]
+          '[-]' = ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'annotation', 'annotation-xml']
         # more options e.g. skipHtmlTags, ignoreHtmlClass etc.
   # Code wrapper config
   [page.code]
