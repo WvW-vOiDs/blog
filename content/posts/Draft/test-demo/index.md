@@ -1655,7 +1655,7 @@ console.log('Hello FixIt!');
 - :smile: vs. 😄
 
   > [!Note]
-  > 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入emoji. 但无论true or false 都不影响直接输入 unicode版 emoji.
+  > 如果在配置文件里设置了 enableEmoji: true 则可以通过左边的方式输入 emoji. 但无论 true or false 都不影响直接输入 unicode 版 emoji.
 
 ---
 ## References
